@@ -17,6 +17,15 @@ public class Player : MonoBehaviour
     //Player jump
     float jumpForce;
     Vector2 jump = new Vector2(0f, 1f);
+    bool isGrounded;
+
+    //Player Attack
+    public Transform AttackPoint;
+    float attackRange = 0.2f;
+    LayerMask enemyLayer;
+
+    public float attackRate = 2f;
+    float nextAttackTime = 0f;
     void Start()
     {
         moveSpeed = 5f;
@@ -29,6 +38,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        AttackAnimationPlayer();
         PlayerJump();
     }
     private void FixedUpdate()
@@ -39,14 +49,24 @@ public class Player : MonoBehaviour
     {
         this.pressHorizontal = Input.GetAxis("Horizontal");
         this.velocity.x = pressHorizontal * moveSpeed * Time.deltaTime;
+
         transform.Translate(velocity);
 
+        
         if (pressHorizontal > 0 || pressHorizontal < 0)
         {
-            anim.SetFloat("PlayerRun", 2);
+             anim.SetFloat("PlayerRuns", 2);
         }
         else
-            anim.SetFloat("PlayerRun", -1);
+             anim.SetFloat("PlayerRuns", -1);
+        
+
+
+        if (!isGrounded && anim.GetBool("PlayerJump"))
+        {
+            anim.SetFloat("PlayerRuns", 0);
+        }
+
 
         if (pressHorizontal < 0 && !facingRight)
         {
@@ -61,10 +81,13 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("jump");
-            this.rb.AddForce(jump * jumpForce, ForceMode2D.Impulse);
+            if (isGrounded == true)
+            {
+                anim.SetBool("PlayerJump", true);
+                this.rb.AddForce(jump * jumpForce, ForceMode2D.Impulse);
+                isGrounded = false;
+            }
         }
-
     }
     public void setFacingRight()
     {
@@ -73,4 +96,55 @@ public class Player : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
     }
+
+
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        isGrounded = true;
+        anim.SetBool("PlayerJump", false);
+    }
+
+
+
+    //PlayerAttack
+    public void attackPlayers()
+    {
+        Collider2D[] hitEnemy = Physics2D.OverlapCircleAll(AttackPoint.position, attackRange, enemyLayer);
+        foreach (Collider2D enemy in hitEnemy)
+        {
+            Debug.Log("Attack Enemy");
+            enemy.GetComponent<Enemy>().ReceiveDame(10);
+        }
+    }
+    public void OnDrawGizmosSelected()
+    {
+        if (AttackPoint == null)
+        {
+            return;
+        }
+        Gizmos.DrawWireSphere(AttackPoint.position, attackRange);
+    }
+    public void AttackAnimationPlayer()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            if (pressHorizontal < 0 || pressHorizontal > 0)
+            {
+                return;
+            }
+            else
+            {
+                if (Time.time >= nextAttackTime)
+                {
+                    anim.SetTrigger("PlayerAttack");
+                    this.pressHorizontal = 0f;
+                    attackPlayers();
+                    nextAttackTime = Time.time + 0.2f / attackRange;
+
+                }
+
+            }
+        }
+    }
+
 }
