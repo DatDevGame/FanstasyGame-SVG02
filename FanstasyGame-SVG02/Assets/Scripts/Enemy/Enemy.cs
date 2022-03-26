@@ -5,16 +5,20 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     Rigidbody2D rb;
+    Animator anim;
 
     protected float maxHealth;
-    protected float currentHealth;
+    public float currentHealth;
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
         maxHealth = 100f;
         currentHealth = maxHealth;
+
+        anim.SetBool("DeadEnemy", false);
     }
 
     // Update is called once per frame
@@ -26,6 +30,8 @@ public class Enemy : MonoBehaviour
     public void ReceiveDame(int dame)
     {
         currentHealth -= dame;
+        anim.SetTrigger("HurtEnemy");
+        Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
             EnemyDead();
@@ -33,6 +39,11 @@ public class Enemy : MonoBehaviour
     }
     public void EnemyDead()
     {
-        Destroy(gameObject);
+        anim.SetBool("DeadEnemy", true);
+
+        GetComponent<Rigidbody2D>().gravityScale = 0f;
+        GetComponent<Collider2D>().enabled = false;
+        this.enabled = false;
+        Destroy(gameObject, 5f);
     }
 }

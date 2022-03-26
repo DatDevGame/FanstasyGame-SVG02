@@ -21,8 +21,8 @@ public class Player : MonoBehaviour
 
     //Player Attack
     public Transform AttackPoint;
-    float attackRange = 0.2f;
-    LayerMask enemyLayer;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayer;
 
     public float attackRate = 2f;
     float nextAttackTime = 0f;
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
     }
     public void PlayerJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             if (isGrounded == true)
             {
@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
         foreach (Collider2D enemy in hitEnemy)
         {
             Debug.Log("Attack Enemy");
-            enemy.GetComponent<Enemy>().ReceiveDame(10);
+            enemy.GetComponent<Enemy>().ReceiveDame(50);
         }
     }
     public void OnDrawGizmosSelected()
@@ -139,12 +139,10 @@ public class Player : MonoBehaviour
                     anim.SetTrigger("PlayerAttack");
                     this.pressHorizontal = 0f;
                     attackPlayers();
-                    nextAttackTime = Time.time + 0.2f / attackRange;
-
+                    nextAttackTime = Time.time + 0.5f / attackRange;
                 }
 
             }
         }
     }
-
 }
