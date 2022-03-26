@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
 
     //Player Dash
     float moveDash = 7f;
+    float nextDashTime;
+    public float dashRate = 1f;
   
     //Player jump
     float jumpForce;
@@ -27,7 +29,7 @@ public class Player : MonoBehaviour
     public float attackRange = 0.5f;
     public LayerMask enemyLayer;
 
-    public float attackRate = 2f;
+    public float attackRate = 0.5f;
     float nextAttackTime = 0f;
     void Start()
     {
@@ -89,10 +91,30 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            anim.SetFloat("PlayerRuns", -1f);
-            anim.SetTrigger("PlayerDash");
-            this.rb.velocity = Vector2.right * moveDash;
+            if (Time.time >= nextDashTime)
+            {
+                if (!anim.GetBool("PlayerJump"))
+                {
+                    if (pressHorizontal < 0)
+                    {
+                        anim.SetFloat("PlayerRuns", -1f);
+                        anim.SetTrigger("PlayerDash");
+                        this.rb.velocity = Vector2.left * moveDash;
+                        nextDashTime = Time.time + 2f / dashRate;
+                    }
+                    else if (pressHorizontal > 0)
+                    {
+                        anim.SetFloat("PlayerRuns", -1f);
+                        anim.SetTrigger("PlayerDash");
+                        this.rb.velocity = Vector2.right * moveDash;
+                        nextDashTime = Time.time + 2f / dashRate;
+                    }
+                }
+                
+                
+            }
         }
+           
     }
 
     //Player Jump
@@ -160,7 +182,7 @@ public class Player : MonoBehaviour
                     anim.SetTrigger("PlayerAttack");
                     this.pressHorizontal = 0f;
                     attackPlayers();
-                    nextAttackTime = Time.time + 0.5f / attackRange;
+                    nextAttackTime = Time.time + 2f / attackRate;
                 }
 
             }

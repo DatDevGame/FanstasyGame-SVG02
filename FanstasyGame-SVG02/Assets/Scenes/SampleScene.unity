@@ -1105,7 +1105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.069, y: 1.5843997, z: -10}
+  m_LocalPosition: {x: -6.069, y: 0.4099996, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1171,7 +1171,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 548483073}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.069, y: 1.5843997, z: -10}
+  m_LocalPosition: {x: -6.069, y: 0.4099996, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 240409195}
@@ -1647,6 +1647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bf94d0a38a66e4c8ec76b7b96232a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashRate: 1
   AttackPoint: {fileID: 1413060143}
   attackRange: 0.32
   enemyLayer:
@@ -1768,7 +1769,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902526138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.069, y: -1.7356, z: 0}
+  m_LocalPosition: {x: -6.069, y: -2.91, z: 0}
   m_LocalScale: {x: 3.6890113, y: 3.783299, z: 1}
   m_Children:
   - {fileID: 1413060143}
@@ -2024,7 +2025,7 @@ Animator:
   m_GameObject: {fileID: 1138033843}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8178ac4c4d5dae140b050909424c154d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3091e593bc5a5134aad945b03af681c0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2105,7 +2106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1138033843}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.35096216, y: -1.7990947, z: 0}
+  m_LocalPosition: {x: -0.35096216, y: -2.27, z: 0}
   m_LocalScale: {x: -3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
