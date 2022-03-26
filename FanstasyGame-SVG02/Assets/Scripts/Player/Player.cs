@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     Vector2 velocity = new Vector2();
     bool facingRight;
 
+    //Player Dash
+    float moveDash = 7f;
+  
     //Player jump
     float jumpForce;
     Vector2 jump = new Vector2(0f, 1f);
@@ -28,6 +31,7 @@ public class Player : MonoBehaviour
     float nextAttackTime = 0f;
     void Start()
     {
+
         moveSpeed = 5f;
         jumpForce = 10f;
 
@@ -40,11 +44,14 @@ public class Player : MonoBehaviour
     {
         AttackAnimationPlayer();
         PlayerJump();
+        PlayerDash();
     }
     private void FixedUpdate()
     {
         PlayerMovent();
     }
+
+    //Player Movement
     public void PlayerMovent()
     {
         this.pressHorizontal = Input.GetAxis("Horizontal");
@@ -77,6 +84,18 @@ public class Player : MonoBehaviour
             setFacingRight();
         }
     }
+
+    public void PlayerDash()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            anim.SetFloat("PlayerRuns", -1f);
+            anim.SetTrigger("PlayerDash");
+            this.rb.velocity = Vector2.right * moveDash;
+        }
+    }
+
+    //Player Jump
     public void PlayerJump()
     {
         if (Input.GetKeyDown(KeyCode.W))
@@ -89,6 +108,8 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    //Set facing Player
     public void setFacingRight()
     {
         facingRight = !facingRight;
@@ -97,7 +118,7 @@ public class Player : MonoBehaviour
         transform.localScale = theScale;
     }
 
-
+    //Confirm Player on the Ground
     public void OnCollisionEnter2D(Collision2D other)
     {
         isGrounded = true;
