@@ -23,25 +23,48 @@ public class MeleeEnemy : MonoBehaviour
     }
     public void TestRaycat()
     {
-        RaycastHit2D hit = Physics2D.Raycast(PosRaycat.position, Vector2.left, lengthRaycat, playLayer);
-
-        if (hit.collider != null)
+        RaycastHit2D hit1 = Physics2D.Raycast(PosRaycat.position, Vector2.left, lengthRaycat, playLayer);
+        if (hit1.collider != null)
         {
-            if (hit.collider.tag == "Player")
+            if (hit1.collider.tag == "Player")
             {
                 if (Time.time >= nextAttackTime)
                 {
                     Debug.Log("Hit Player");
                     anim.SetTrigger("AttackEnemy");
+                    anim.SetBool("canWalk", false);
                     nextAttackTime = Time.time + 2f / attackRate;
                 }
                 Debug.DrawRay(PosRaycat.position, Vector2.left * lengthRaycat, Color.red);
             }
         }
-        else if (hit.collider == null)
+        else if (hit1.collider == null)
         {
             Debug.Log("Not Hit");
-            Debug.DrawRay(PosRaycat.position, Vector2.left * lengthRaycat, Color.green) ;
+            Debug.DrawRay(PosRaycat.position, Vector2.left * lengthRaycat, Color.green);
+        }
+
+
+
+        RaycastHit2D hit2 = Physics2D.Raycast(PosRaycat.position, Vector2.right, lengthRaycat, playLayer);
+        if (hit2.collider != null)
+        {
+            if (hit2.collider.tag == "Player")
+            {
+                if (Time.time >= nextAttackTime)
+                {
+                    Debug.Log("Hit Player");
+                    anim.SetTrigger("AttackEnemy");
+                    anim.SetBool("canWalk", false);
+                    nextAttackTime = Time.time + 2f / attackRate;
+                }
+                Debug.DrawRay(PosRaycat.position, Vector2.right * lengthRaycat, Color.red);
+            }
+        }
+        else if (hit2.collider == null)
+        {
+            Debug.Log("Not Hit");
+            Debug.DrawRay(PosRaycat.position, Vector2.right * lengthRaycat, Color.green) ;
         }
         
     }
@@ -69,4 +92,7 @@ public class MeleeEnemy : MonoBehaviour
         }
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+
+
+    
 }

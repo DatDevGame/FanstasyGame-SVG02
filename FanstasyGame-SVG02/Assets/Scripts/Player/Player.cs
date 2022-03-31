@@ -163,7 +163,7 @@ public class Player : MonoBehaviour
         foreach (Collider2D enemy in hitEnemy)
         {
             Debug.Log("Attack Enemy");
-            enemy.GetComponent<Enemy>().ReceiveDame(50);
+            enemy.GetComponent<Enemy>().ReceiveDame(10);
         }
     }
     public void OnDrawGizmosSelected()

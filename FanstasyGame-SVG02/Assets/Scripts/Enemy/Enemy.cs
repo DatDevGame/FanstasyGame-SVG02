@@ -7,9 +7,19 @@ public class Enemy : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
 
+
+    //Create Health Enemy
     protected float maxHealth;
     public float currentHealth;
-    // Start is called before the first frame update
+
+
+    //Enemy Movement
+    public Transform target;
+    public float speedMove;
+    Vector2 velocity = new Vector2();
+    Vector2 localScale = new Vector2();
+    float distanceAttack;
+    bool facingRight;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -25,6 +35,10 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         
+    }
+    private void FixedUpdate()
+    {
+        EnemyMove();
     }
 
     public void ReceiveDame(int dame)
@@ -45,5 +59,49 @@ public class Enemy : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
         Destroy(gameObject, 5f);
+    }
+
+    //Check Distance Attack
+    public void EnemyMove()
+    {
+        this.distanceAttack = Vector2.Distance(target.position, transform.position);
+        Debug.Log(distanceAttack);
+        if (distanceAttack <= 6)
+        {
+            if (target.position.x < transform.position.x)
+            {
+                if (distanceAttack <= 1) return;
+                anim.SetBool("canWalk", true);
+                transform.localScale = new Vector3(3f, 3f, 3f);
+                this.velocity = Vector2.left * speedMove * Time.deltaTime;
+                transform.Translate(velocity);
+                setFacingRight();
+
+            }
+            else
+            {
+               
+                if (distanceAttack <= 1) return;
+                anim.SetBool("canWalk", true);
+                transform.localScale = new Vector3(-3f, 3f, 3f);
+                this.velocity = Vector2.right * speedMove * Time.deltaTime;
+                transform.Translate(velocity);
+                setFacingRight();
+
+
+            }
+
+        }
+        else
+        {
+            anim.SetBool("canWalk", false);
+        }
+    }
+    public void setFacingRight()
+    {
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 }
