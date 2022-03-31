@@ -4,55 +4,69 @@ using UnityEngine;
 
 public class MeleeEnemy : MonoBehaviour
 {
-    [SerializeField] private float attackCooldown;
-    [SerializeField] private float range;
-    [SerializeField] private float colliderDistance;
-    [SerializeField] private int damage;
-    [SerializeField] private BoxCollider2D boxCollider;
-    [SerializeField] private LayerMask playerLayer;
-    private float cooldownTimer;
+    public Transform PosRaycat;
+    public LayerMask playLayer;
+    [SerializeField] private float lengthRaycat = 5f;
+
+    float nextAttackTime;
+    public float attackRate = 2f;
+
+    //Enemy Attack
+    public Transform attackPoint;
+    public float attackRange;
 
     Animator anim;
-    // Start is called before the first frame update
-    private void Awake()
+
+    private void Start()
     {
         anim = GetComponent<Animator>();
     }
-    void Start()
+    public void TestRaycat()
     {
+        RaycastHit2D hit = Physics2D.Raycast(PosRaycat.position, Vector2.left, lengthRaycat, playLayer);
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        cooldownTimer += Time.deltaTime;
-        if (PlayerInSight())
+        if (hit.collider != null)
         {
-            Debug.Log("Collision");
-            if (cooldownTimer >= attackCooldown)
+            if (hit.collider.tag == "Player")
             {
-                Debug.Log("Attack");
-                anim.SetTrigger("AttackEnemy");
-                cooldownTimer = 0;
-                
+                if (Time.time >= nextAttackTime)
+                {
+                    Debug.Log("Hit Player");
+                    anim.SetTrigger("AttackEnemy");
+                    nextAttackTime = Time.time + 2f / attackRate;
+                }
+                Debug.DrawRay(PosRaycat.position, Vector2.left * lengthRaycat, Color.red);
             }
         }
-
+        else if (hit.collider == null)
+        {
+            Debug.Log("Not Hit");
+            Debug.DrawRay(PosRaycat.position, Vector2.left * lengthRaycat, Color.green) ;
+        }
+        
+    }
+    private void Update()
+    {
+        TestRaycat();
     }
 
-    private bool PlayerInSight()
+    //Enemy Attack
+    public void EnemyAttack()
     {
-        RaycastHit2D hit = 
-            Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance, 
-            new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z),
-            0, Vector2.left, 0, playerLayer);
-        return hit.collider != null;
+        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playLayer);
+
+        foreach (Collider2D player in hitPlayer)
+        {
+            Debug.Log("Hit Player");
+            player.GetComponent<Player>().receiveDame(10);
+        }   
     }
-    private void OnDrawGizmos()
+    public void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance, 
-            new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
+        if (attackPoint == null)
+        {
+            return;
+        }
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }

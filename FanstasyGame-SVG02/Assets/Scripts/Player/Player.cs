@@ -31,8 +31,15 @@ public class Player : MonoBehaviour
 
     public float attackRate = 0.5f;
     float nextAttackTime = 0f;
+
+    //Heal Player
+    float maxHealth;
+    float currentHealth;
     void Start()
     {
+        maxHealth = 100f;
+        currentHealth = maxHealth;
+
 
         moveSpeed = 5f;
         jumpForce = 10f;
@@ -188,4 +195,19 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    //Recieve Dame
+    public void receiveDame(int dame)
+    {
+        currentHealth -= dame;
+        if (currentHealth <= 0)
+        {
+            playerDead();
+        }
+    }
+    public void playerDead()
+    {
+        Destroy(gameObject);
+    }
+
 }
