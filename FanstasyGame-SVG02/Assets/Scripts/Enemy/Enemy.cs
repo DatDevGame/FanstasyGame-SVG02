@@ -64,7 +64,6 @@ public class Enemy : MonoBehaviour
     public void EnemyMove()
     {
         this.distanceAttack = Vector2.Distance(target.position, transform.position);
-        Debug.Log(distanceAttack);
         if (distanceAttack <= 3)
         {
             if (target.position.x < transform.position.x)

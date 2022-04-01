@@ -122,16 +122,36 @@ public class Player : MonoBehaviour
                 {
                     if (pressHorizontal < 0)
                     {
+                        currentPower -= 10;
+                        sliderPower.value = currentPower;
                         anim.SetFloat("PlayerRuns", -1f);
-                        anim.SetTrigger("PlayerDash");
+                        anim.SetBool("PlayerDash", true);
                         this.rb.velocity = Vector2.left * moveDash;
+                        if (anim.GetBool("PlayerDash"))
+                        {
+                            if (Input.GetKeyDown(KeyCode.K))
+                            {
+                                anim.SetBool("PlayerDashAttack", true);
+                                anim.SetBool("PlayerDash", false);
+                            }
+                        }
                         nextDashTime = Time.time + 2f / dashRate;
                     }
                     else if (pressHorizontal > 0)
                     {
+                        currentPower -= 5;
+                        sliderPower.value = currentPower;
                         anim.SetFloat("PlayerRuns", -1f);
-                        anim.SetTrigger("PlayerDash");
+                        anim.SetBool("PlayerDash", true);
                         this.rb.velocity = Vector2.right * moveDash;
+                        if (anim.GetBool("PlayerDash"))
+                        {
+                            if (Input.GetKeyDown(KeyCode.K))
+                            {
+                                anim.SetBool("PlayerDashAttack", true);
+                                anim.SetBool("PlayerDash", false);
+                            }
+                        }
                         nextDashTime = Time.time + 2f / dashRate;
                     }
                 }
@@ -204,7 +224,6 @@ public class Player : MonoBehaviour
             {
                 if (Time.time >= nextAttackTime)
                 {
-                    stopMoveAttack = true;
                     anim.SetTrigger("PlayerAttack");
                     this.pressHorizontal = 0f;
                     attackPlayers();
@@ -214,15 +233,28 @@ public class Player : MonoBehaviour
             }
         }
     }
+    //Set Status Animation
     public void setStopMoveAttack()
     {
         stopMoveAttack = false;
     }
-
+    public void setStartMoveAttack()
+    {
+        stopMoveAttack = true;
+    }
+    public void SetBoolDashAttack()
+    {
+        anim.SetBool("PlayerDashAttack", false);
+    }
+    public void SetBoolDash()
+    {
+        anim.SetBool("PlayerDash", false);
+    }
     //Recieve Dame
     public void receiveDame(int dame)
     {
         currentHealth -= dame;
+        sliderHealth.value = currentHealth;
         anim.SetTrigger("PlayerHurt");
         if (currentHealth <= 0)
         {
