@@ -28,17 +28,34 @@ public class Player : MonoBehaviour
     public Transform AttackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayer;
+    bool stopMoveAttack = false;
 
     public float attackRate = 0.5f;
     float nextAttackTime = 0f;
 
-    //Heal Player
+    //Heal Player and Power
     float maxHealth;
     float currentHealth;
+
+    float maxPower;
+    float currentPower;
+
+
+
+    //Create Slider bar
+    public Slider sliderHealth;
+    public Slider sliderPower;
     void Start()
     {
         maxHealth = 100f;
         currentHealth = maxHealth;
+        sliderHealth.maxValue = maxHealth;
+        sliderHealth.value = maxHealth;
+
+        maxPower = 100f;
+        currentPower = maxPower;
+        sliderPower.maxValue = maxPower;
+        sliderPower.value = maxPower;
 
 
         moveSpeed = 5f;
@@ -63,6 +80,7 @@ public class Player : MonoBehaviour
     //Player Movement
     public void PlayerMovent()
     {
+        if (stopMoveAttack) return;
         this.pressHorizontal = Input.GetAxis("Horizontal");
         this.velocity.x = pressHorizontal * moveSpeed * Time.deltaTime;
 
@@ -186,6 +204,7 @@ public class Player : MonoBehaviour
             {
                 if (Time.time >= nextAttackTime)
                 {
+                    stopMoveAttack = true;
                     anim.SetTrigger("PlayerAttack");
                     this.pressHorizontal = 0f;
                     attackPlayers();
@@ -195,11 +214,16 @@ public class Player : MonoBehaviour
             }
         }
     }
+    public void setStopMoveAttack()
+    {
+        stopMoveAttack = false;
+    }
 
     //Recieve Dame
     public void receiveDame(int dame)
     {
         currentHealth -= dame;
+        anim.SetTrigger("PlayerHurt");
         if (currentHealth <= 0)
         {
             playerDead();

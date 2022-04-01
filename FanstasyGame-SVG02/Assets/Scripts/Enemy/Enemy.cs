@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour
     public Transform target;
     public float speedMove;
     Vector2 velocity = new Vector2();
-    Vector2 localScale = new Vector2();
     float distanceAttack;
     bool facingRight;
     void Start()
@@ -66,7 +65,7 @@ public class Enemy : MonoBehaviour
     {
         this.distanceAttack = Vector2.Distance(target.position, transform.position);
         Debug.Log(distanceAttack);
-        if (distanceAttack <= 6)
+        if (distanceAttack <= 3)
         {
             if (target.position.x < transform.position.x)
             {
@@ -103,5 +102,11 @@ public class Enemy : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    public void setStopMoveWhenHurt()
+    {
+        this.velocity = Vector2.zero;
+        transform.Translate(velocity);
     }
 }
