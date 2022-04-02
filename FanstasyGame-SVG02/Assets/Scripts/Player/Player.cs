@@ -127,14 +127,6 @@ public class Player : MonoBehaviour
                         anim.SetFloat("PlayerRuns", -1f);
                         anim.SetBool("PlayerDash", true);
                         this.rb.velocity = Vector2.left * moveDash;
-                        if (anim.GetBool("PlayerDash"))
-                        {
-                            if (Input.GetKeyDown(KeyCode.K))
-                            {
-                                anim.SetBool("PlayerDashAttack", true);
-                                anim.SetBool("PlayerDash", false);
-                            }
-                        }
                         nextDashTime = Time.time + 2f / dashRate;
                     }
                     else if (pressHorizontal > 0)
@@ -144,19 +136,20 @@ public class Player : MonoBehaviour
                         anim.SetFloat("PlayerRuns", -1f);
                         anim.SetBool("PlayerDash", true);
                         this.rb.velocity = Vector2.right * moveDash;
-                        if (anim.GetBool("PlayerDash"))
-                        {
-                            if (Input.GetKeyDown(KeyCode.K))
-                            {
-                                anim.SetBool("PlayerDashAttack", true);
-                                anim.SetBool("PlayerDash", false);
-                            }
-                        }
                         nextDashTime = Time.time + 2f / dashRate;
                     }
                 }
                 
                 
+            }
+        }
+
+        if (anim.GetBool("PlayerDash"))
+        {
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                anim.SetBool("PlayerDashAttack", true);
+                anim.SetBool("PlayerDash", false);
             }
         }
            
