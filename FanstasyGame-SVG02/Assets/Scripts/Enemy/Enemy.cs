@@ -19,6 +19,10 @@ public class Enemy : MonoBehaviour
     Vector2 velocity = new Vector2();
     float distanceAttack;
     bool facingRight;
+
+    //Create Item when Enemy Dead
+    public GameObject PrefabsItems;
+    public Transform PosSpawn;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -33,7 +37,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     private void FixedUpdate()
     {
@@ -52,8 +56,8 @@ public class Enemy : MonoBehaviour
     }
     public void EnemyDead()
     {
+        Instantiate(PrefabsItems, PosSpawn.position, Quaternion.identity);
         anim.SetBool("DeadEnemy", true);
-
         GetComponent<Rigidbody2D>().gravityScale = 0f;
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
@@ -108,4 +112,7 @@ public class Enemy : MonoBehaviour
         this.velocity = Vector2.zero;
         transform.Translate(velocity);
     }
+
+
+
 }

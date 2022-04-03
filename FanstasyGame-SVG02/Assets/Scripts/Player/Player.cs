@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     Vector2 jump = new Vector2(0f, 1f);
     bool isGrounded;
 
+
     //Player Attack
     public Transform AttackPoint;
     public float attackRange = 0.5f;
@@ -122,7 +123,8 @@ public class Player : MonoBehaviour
                 {
                     if (pressHorizontal < 0)
                     {
-                        currentPower -= 10;
+                        if (currentPower <= 0) return;
+                        currentPower -= 5;
                         sliderPower.value = currentPower;
                         anim.SetFloat("PlayerRuns", -1f);
                         anim.SetBool("PlayerDash", true);
@@ -131,6 +133,7 @@ public class Player : MonoBehaviour
                     }
                     else if (pressHorizontal > 0)
                     {
+                        if (currentPower <= 0) return;
                         currentPower -= 5;
                         sliderPower.value = currentPower;
                         anim.SetFloat("PlayerRuns", -1f);
@@ -256,7 +259,8 @@ public class Player : MonoBehaviour
     }
     public void playerDead()
     {
-        Destroy(gameObject);
+        anim.SetBool("PlayerDead", true);
+        Destroy(gameObject, 2);
     }
 
 }
