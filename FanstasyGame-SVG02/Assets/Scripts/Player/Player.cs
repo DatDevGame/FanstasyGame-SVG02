@@ -79,8 +79,11 @@ public class Player : MonoBehaviour
     }
 
     //Player Movement
+
     public void PlayerMovent()
     {
+        if (anim.GetBool("PlayerDead")) return;
+
         if (stopMoveAttack) return;
         this.pressHorizontal = Input.GetAxis("Horizontal");
         this.velocity.x = pressHorizontal * moveSpeed * Time.deltaTime;
@@ -115,6 +118,8 @@ public class Player : MonoBehaviour
 
     public void PlayerDash()
     {
+        if (anim.GetBool("PlayerDead")) return;
+
         if (Input.GetKeyDown(KeyCode.L))
         {
             if (Time.time >= nextDashTime)
@@ -161,6 +166,8 @@ public class Player : MonoBehaviour
     //Player Jump
     public void PlayerJump()
     {
+        if (anim.GetBool("PlayerDead")) return;
+
         if (Input.GetKeyDown(KeyCode.W))
         {
             if (isGrounded == true)
@@ -193,11 +200,13 @@ public class Player : MonoBehaviour
     //PlayerAttack
     public void attackPlayers()
     {
+
+
         Collider2D[] hitEnemy = Physics2D.OverlapCircleAll(AttackPoint.position, attackRange, enemyLayer);
         foreach (Collider2D enemy in hitEnemy)
         {
             Debug.Log("Attack Enemy");
-            enemy.GetComponent<Enemy>().ReceiveDame(10);
+            enemy.GetComponent<Enemy>().ReceiveDame(50);
         }
     }
     public void OnDrawGizmosSelected()
@@ -210,6 +219,8 @@ public class Player : MonoBehaviour
     }
     public void AttackAnimationPlayer()
     {
+        if (anim.GetBool("PlayerDead")) return;
+
         if (Input.GetKeyDown(KeyCode.J))
         {
             if (pressHorizontal < 0 || pressHorizontal > 0)
@@ -249,6 +260,8 @@ public class Player : MonoBehaviour
     //Recieve Dame
     public void receiveDame(int dame)
     {
+        if (anim.GetBool("PlayerDead")) return;
+
         currentHealth -= dame;
         sliderHealth.value = currentHealth;
         anim.SetTrigger("PlayerHurt");

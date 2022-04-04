@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
     }
     public void EnemyDead()
     {
-        Instantiate(PrefabsItems, PosSpawn.position, Quaternion.identity);
+        Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
         anim.SetBool("DeadEnemy", true);
         GetComponent<Rigidbody2D>().gravityScale = 0f;
         GetComponent<Collider2D>().enabled = false;

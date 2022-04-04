@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 7447744332778908678}
   - component: {fileID: 2255497520513975721}
   - component: {fileID: 5531498753684969037}
+  - component: {fileID: -8659101866777212690}
+  - component: {fileID: -8709769978540987117}
   m_Layer: 0
   m_Name: gem_1
-  m_TagString: Untagged
+  m_TagString: ItemGem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4367602803913053016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7669, y: -2.3147, z: 0}
-  m_LocalScale: {x: 0.3496776, y: 0.4047103, z: 1}
+  m_LocalPosition: {x: -1.377, y: -2.358, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -102,3 +104,60 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-8659101866777212690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4367602803913053016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a04ab55f3337e43b74e1db73284397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!60 &-8709769978540987117
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4367602803913053016}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.79, y: 1.05}
+    newSize: {x: 0.79, y: 1.05}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.355, y: -0.095}
+      - {x: 0.39499998, y: -0.044999998}
+      - {x: 0.39499998, y: 0.035}
+      - {x: 0.355, y: 0.095}
+      - {x: 0.295, y: 0.175}
+      - {x: 0.265, y: 0.205}
+      - {x: 0.114999995, y: 0.415}
+      - {x: 0.055, y: 0.49499997}
+      - {x: 0.024999999, y: 0.525}
+      - {x: -0.024999999, y: 0.525}
+      - {x: -0.385, y: 0.044999998}
+      - {x: -0.39499998, y: 0.035}
+      - {x: -0.39499998, y: -0.044999998}
+      - {x: -0.325, y: -0.125}
+      - {x: -0.055, y: -0.48499998}
+      - {x: -0.015, y: -0.525}
+      - {x: 0.015, y: -0.525}
+      - {x: 0.055, y: -0.48499998}
+      - {x: 0.235, y: -0.24499999}
+      - {x: 0.295, y: -0.175}
