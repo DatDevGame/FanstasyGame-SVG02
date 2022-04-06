@@ -37,11 +37,15 @@ public class Player : MonoBehaviour
             //
             //Slide Wall
     public Transform checkWallSlide;
-    public LayerMask wallLayer;
     bool isCheckWallSlide;
-    bool isWallSlide;
-    float CheckWallRadius = 0.1f;
-    float moveSlideWall = 2f;
+    bool isTouchingWall;
+    float moveSlideWall = -0.4f;
+    //Check Jump when Slide wall
+    bool Walljumping;
+    public float xWallForce;
+    public float yWallForce;
+    public float timeJumpWall;
+
 
     
 
@@ -206,33 +210,49 @@ public class Player : MonoBehaviour
             isGrounded = false;
             anim.SetBool("PlayerJump", true);
         }
-
-
         if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
             this.rb.AddForce(jump * jumpForce, ForceMode2D.Impulse);
         }
-        Debug.Log(isCheckGrounded);
-    }
-    public void PlayerWallSlide()
-    {
-        isCheckWallSlide = Physics2D.OverlapCircle(checkWallSlide.position, CheckWallRadius, groundLayer);
-        if (isCheckWallSlide)
+
+
+        isTouchingWall = Physics2D.OverlapCircle(checkWallSlide.position, CheckGroundradius, groundLayer);
+        if (isTouchingWall && !isGrounded && pressHorizontal != 0)
         {
-            isWallSlide = true;
-            anim.SetBool("PlayerWallSlide", true);
+            isCheckWallSlide = true;
+            anim.SetBool("PlayerWallJump", true);
         }
         else
         {
-            isWallSlide = false;
-            anim.SetBool("PlayerWallSlide", false);
+            isCheckWallSlide = false;
+            anim.SetBool("PlayerWallJump", false);
         }
 
-        if (!isGrounded && isWallSlide)
+        if (isCheckWallSlide)
         {
-            this.rb.velocity = new Vector2(this.rb.velocity.x, moveSlideWall);
+            this.rb.velocity = new Vector2(this.rb.velocity.x, Mathf.Clamp(this.rb.velocity.y, moveSlideWall, float.MaxValue));
         }
+
+        if (Input.GetKeyDown(KeyCode.W) && isCheckWallSlide)
+        {
+            Walljumping = true;
+            Invoke("setBoolWallJumpFalse", timeJumpWall);
+        }
+
+        if (Walljumping)
+        {
+            this.rb.velocity = new Vector2(xWallForce * -pressHorizontal, yWallForce);
+        }
+
+
+
+        
     }
+    public void setBoolWallJumpFalse()
+    {
+        Walljumping = false;
+    }
+
 
     //Set facing Player
     public void setFacingRight()
@@ -304,7 +324,7 @@ public class Player : MonoBehaviour
     {
         anim.SetBool("PlayerDash", false);
     }
-    public void SetBoolHurt()
+    void SetBoolHurt()
     {
         isNotMove = false;
     }
@@ -318,10 +338,12 @@ public class Player : MonoBehaviour
         sliderHealth.value = currentHealth;
         anim.SetTrigger("PlayerHurt");
         isNotMove = true;
+        Invoke("SetBoolHurt", 0.9f);
         if (currentHealth <= 0)
         {
             playerDead();
         }
+        
     }
 
 
@@ -332,6 +354,7 @@ public class Player : MonoBehaviour
         sliderHealth.value = currentHealth;
         anim.SetTrigger("PlayerHurt");
         isNotMove = true;
+        Invoke("SetBoolHurt", 0.9f);
         if (currentHealth <= 0)
         {
             playerDead();
