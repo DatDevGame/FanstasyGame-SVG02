@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
 
+    //Set During Hurt not Move
+    bool isNotMove;
+
     //Player move
     float moveSpeed;
     protected float pressHorizontal;
@@ -36,8 +39,9 @@ public class Player : MonoBehaviour
     public Transform checkWallSlide;
     public LayerMask wallLayer;
     bool isCheckWallSlide;
+    bool isWallSlide;
     float CheckWallRadius = 0.1f;
-    float moveSlideWall = 1f;
+    float moveSlideWall = 2f;
 
     
 
@@ -103,6 +107,7 @@ public class Player : MonoBehaviour
     public void PlayerMovent()
     {
         if (anim.GetBool("PlayerDead")) return;
+        if (isNotMove) return;
 
         if (stopMoveAttack) return;
         this.pressHorizontal = Input.GetAxis("Horizontal");
@@ -139,6 +144,7 @@ public class Player : MonoBehaviour
     public void PlayerDash()
     {
         if (anim.GetBool("PlayerDead")) return;
+        if (isNotMove) return;
 
         if (Input.GetKeyDown(KeyCode.L))
         {
@@ -187,6 +193,7 @@ public class Player : MonoBehaviour
     public void PlayerJump()
     {
         if (anim.GetBool("PlayerDead")) return;
+        if (isNotMove) return;
 
         isCheckGrounded = Physics2D.OverlapCircle(checkGround.position, CheckGroundradius, groundLayer);
         if (isCheckGrounded)
@@ -212,11 +219,18 @@ public class Player : MonoBehaviour
         isCheckWallSlide = Physics2D.OverlapCircle(checkWallSlide.position, CheckWallRadius, groundLayer);
         if (isCheckWallSlide)
         {
+            isWallSlide = true;
             anim.SetBool("PlayerWallSlide", true);
         }
         else
         {
+            isWallSlide = false;
             anim.SetBool("PlayerWallSlide", false);
+        }
+
+        if (!isGrounded && isWallSlide)
+        {
+            this.rb.velocity = new Vector2(this.rb.velocity.x, moveSlideWall);
         }
     }
 
@@ -290,6 +304,11 @@ public class Player : MonoBehaviour
     {
         anim.SetBool("PlayerDash", false);
     }
+    public void SetBoolHurt()
+    {
+        isNotMove = false;
+    }
+
     //Recieve Dame
     public void receiveDame(int dame)
     {
@@ -298,6 +317,7 @@ public class Player : MonoBehaviour
         currentHealth -= dame;
         sliderHealth.value = currentHealth;
         anim.SetTrigger("PlayerHurt");
+        isNotMove = true;
         if (currentHealth <= 0)
         {
             playerDead();
@@ -311,12 +331,15 @@ public class Player : MonoBehaviour
         currentHealth -= dameTrap;
         sliderHealth.value = currentHealth;
         anim.SetTrigger("PlayerHurt");
+        isNotMove = true;
         if (currentHealth <= 0)
         {
             playerDead();
 
         }
     }
+
+
     public void playerDead()
     {
         anim.SetBool("PlayerDead", true);
