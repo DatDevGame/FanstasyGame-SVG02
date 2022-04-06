@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    public static Player ins;
+
     Rigidbody2D rb;
     Animator anim;
 
@@ -63,6 +65,8 @@ public class Player : MonoBehaviour
     public Slider sliderPower;
     void Start()
     {
+        ins = this;
+
         maxHealth = 100f;
         currentHealth = maxHealth;
         sliderHealth.maxValue = maxHealth;
@@ -208,7 +212,11 @@ public class Player : MonoBehaviour
         isCheckWallSlide = Physics2D.OverlapCircle(checkWallSlide.position, CheckWallRadius, groundLayer);
         if (isCheckWallSlide)
         {
-            
+            anim.SetBool("PlayerWallSlide", true);
+        }
+        else
+        {
+            anim.SetBool("PlayerWallSlide", false);
         }
     }
 
@@ -295,10 +303,39 @@ public class Player : MonoBehaviour
             playerDead();
         }
     }
+
+
+    //Trap Enviroment
+    public void ReceiveDameTrap(int dameTrap)
+    {
+        currentHealth -= dameTrap;
+        sliderHealth.value = currentHealth;
+        anim.SetTrigger("PlayerHurt");
+        if (currentHealth <= 0)
+        {
+            playerDead();
+
+        }
+    }
     public void playerDead()
     {
         anim.SetBool("PlayerDead", true);
         Destroy(gameObject, 2);
     }
+
+    //Get mana
+    public void Getmana(int receiveMana)
+    {
+        currentPower += receiveMana;
+        sliderPower.value = currentPower;
+        if (currentPower >= 100)
+        {
+            currentPower = 100f;
+        }
+        
+    }
+
+
+   
 
 }

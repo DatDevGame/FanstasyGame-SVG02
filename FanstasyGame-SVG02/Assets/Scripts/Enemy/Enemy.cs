@@ -23,6 +23,10 @@ public class Enemy : MonoBehaviour
     //Create Item when Enemy Dead
     public GameObject PrefabsItems;
     public Transform PosSpawn;
+
+    //Create Item Mana When Enemty Dead
+    public GameObject PrefabsItemMana;
+    public Transform PosSpawnMana;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -56,6 +60,7 @@ public class Enemy : MonoBehaviour
     }
     public void EnemyDead()
     {
+        Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
         Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
         anim.SetBool("DeadEnemy", true);
         GetComponent<Rigidbody2D>().gravityScale = 0f;
