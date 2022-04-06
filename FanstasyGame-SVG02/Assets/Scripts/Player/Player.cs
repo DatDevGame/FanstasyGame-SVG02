@@ -332,10 +332,19 @@ public class Player : MonoBehaviour
         {
             currentPower = 100f;
         }
-        
+    }
+
+    public void GetHealth(int receiveHealth)
+    {
+        currentHealth += receiveHealth;
+        sliderHealth.value = currentHealth;
+        if (currentHealth >= 100)
+        {
+            currentHealth = 100f;
+        }
     }
 
 
-   
+
 
 }

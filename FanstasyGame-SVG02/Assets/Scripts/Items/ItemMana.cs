@@ -5,16 +5,18 @@ using UnityEngine;
 public class ItemMana : MonoBehaviour
 {
     int earnMana;
+    float randSecond;
     // Start is called before the first frame update
     void Start()
     {
+        randSecond = Random.Range(20f, 30f);
         earnMana = 10;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Destroy(gameObject, 30f);
+        Destroy(gameObject, randSecond);
     }
 
     public void OnTriggerEnter2D(Collider2D other)
