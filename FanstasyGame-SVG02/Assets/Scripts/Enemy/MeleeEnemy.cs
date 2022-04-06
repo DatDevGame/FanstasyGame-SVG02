@@ -40,7 +40,6 @@ public class MeleeEnemy : MonoBehaviour
         }
         else if (hit1.collider == null)
         {
-            Debug.Log("Not Hit");
             Debug.DrawRay(PosRaycat.position, Vector2.left * lengthRaycat, Color.green);
         }
 
@@ -53,7 +52,6 @@ public class MeleeEnemy : MonoBehaviour
             {
                 if (Time.time >= nextAttackTime)
                 {
-                    Debug.Log("Hit Player");
                     anim.SetTrigger("AttackEnemy");
                     anim.SetBool("canWalk", false);
                     nextAttackTime = Time.time + 2f / attackRate;
@@ -63,7 +61,6 @@ public class MeleeEnemy : MonoBehaviour
         }
         else if (hit2.collider == null)
         {
-            Debug.Log("Not Hit");
             Debug.DrawRay(PosRaycat.position, Vector2.right * lengthRaycat, Color.green) ;
         }
         

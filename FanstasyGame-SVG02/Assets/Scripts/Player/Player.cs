@@ -18,11 +18,26 @@ public class Player : MonoBehaviour
     float moveDash = 7f;
     float nextDashTime;
     public float dashRate = 1f;
-  
-    //Player jump
+
+    //Player jump -- Slide Wall
+            //Jump
+    public Transform checkGround;
+    bool isCheckGrounded;
+    float CheckGroundradius = 0.1f;
     float jumpForce;
     Vector2 jump = new Vector2(0f, 1f);
     bool isGrounded;
+            //
+    public LayerMask groundLayer;
+            //
+            //Slide Wall
+    public Transform checkWallSlide;
+    public LayerMask wallLayer;
+    bool isCheckWallSlide;
+    float CheckWallRadius = 0.1f;
+    float moveSlideWall = 1f;
+
+    
 
 
     //Player Attack
@@ -60,6 +75,7 @@ public class Player : MonoBehaviour
 
 
         moveSpeed = 5f;
+
         jumpForce = 10f;
 
         rb = GetComponent<Rigidbody2D>();
@@ -97,7 +113,7 @@ public class Player : MonoBehaviour
         }
         else
              anim.SetFloat("PlayerRuns", -1);
-        
+
 
 
         if (!isGrounded && anim.GetBool("PlayerJump"))
@@ -168,14 +184,31 @@ public class Player : MonoBehaviour
     {
         if (anim.GetBool("PlayerDead")) return;
 
-        if (Input.GetKeyDown(KeyCode.W))
+        isCheckGrounded = Physics2D.OverlapCircle(checkGround.position, CheckGroundradius, groundLayer);
+        if (isCheckGrounded)
         {
-            if (isGrounded == true)
-            {
-                anim.SetBool("PlayerJump", true);
-                this.rb.AddForce(jump * jumpForce, ForceMode2D.Impulse);
-                isGrounded = false;
-            }
+            isGrounded = true;
+            anim.SetBool("PlayerJump", false);
+        }
+        else 
+        {
+            isGrounded = false;
+            anim.SetBool("PlayerJump", true);
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+        {
+            this.rb.AddForce(jump * jumpForce, ForceMode2D.Impulse);
+        }
+        Debug.Log(isCheckGrounded);
+    }
+    public void PlayerWallSlide()
+    {
+        isCheckWallSlide = Physics2D.OverlapCircle(checkWallSlide.position, CheckWallRadius, groundLayer);
+        if (isCheckWallSlide)
+        {
+            
         }
     }
 
@@ -187,14 +220,6 @@ public class Player : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
     }
-
-    //Confirm Player on the Ground
-    public void OnCollisionEnter2D(Collision2D other)
-    {
-        isGrounded = true;
-        anim.SetBool("PlayerJump", false);
-    }
-
 
 
     //PlayerAttack
