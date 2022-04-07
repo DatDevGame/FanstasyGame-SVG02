@@ -45,6 +45,13 @@ public class Enemy : MonoBehaviour
     //Create Item health
     public GameObject PrefabsItemHealth;
     public Transform PosSpawnHealth;
+
+    //Check On Ground
+    public LayerMask groundLayer;
+    public Transform CheckOnTheGround;
+    float raycastLength = 0.5f;
+
+
     void Start()
     {
         ins = this;
@@ -61,6 +68,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         randomItem = Random.Range(1, 10);
+        setRaycastCheckOneTheGround();
     }
     private void FixedUpdate()
     {
@@ -69,37 +77,43 @@ public class Enemy : MonoBehaviour
 
     public void ReceiveDame(int dame)
     {
+        if (anim.GetBool("DeadEnemy")) return;
         currentHealth -= dame;
         anim.SetTrigger("HurtEnemy");
         Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
+            //Random Drop Item
+            if (randomItem == 1)
+            {
+                Instantiate(PrefabsItemHealth, PosSpawnHealth.position, PosSpawnHealth.rotation);
+            }
+            else if (randomItem == 5)
+            {
+                Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
+            }
+
+            else if (randomItem == 9)
+            {
+                Instantiate(PrefabsItemHealth, PosSpawnHealth.position, PosSpawnHealth.rotation);
+                Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
+                Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
+            }
+            else
+            {
+                Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
+            }
+
             EnemyDead();
         }
     }
     public void EnemyDead()
     {
-        if (randomItem == 1 || randomItem == 3)
-        {
-            Instantiate(PrefabsItemHealth, PosSpawnHealth.position, PosSpawnHealth.rotation);
-        }
-        else if (randomItem == 5 || randomItem == 7)
-        {
-            Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
-        }
         
-        else if (randomItem == 9)
-        {
-            Instantiate(PrefabsItemHealth, PosSpawnHealth.position, PosSpawnHealth.rotation);
-            Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
-            Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
-        }
-        Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
 
         takeExpPlayer();
 
         anim.SetBool("DeadEnemy", true);
-        GetComponent<Rigidbody2D>().gravityScale = 0f;
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
         Destroy(gameObject, 5f);
@@ -145,6 +159,36 @@ public class Enemy : MonoBehaviour
             anim.SetBool("canWalk", false);
         }
     }
+
+
+
+
+    //Check Enemy On the Grounded
+    public void setRaycastCheckOneTheGround()
+    {
+        RaycastHit2D CheckOntheGrounded = Physics2D.Raycast(CheckOnTheGround.position, Vector2.down, raycastLength, groundLayer);
+
+        if (CheckOntheGrounded.collider != null)
+        {
+            Debug.DrawRay(CheckOnTheGround.position, Vector2.down * raycastLength, Color.green);
+            if (CheckOntheGrounded.collider.tag == "Ground")
+            {
+                return;
+            }
+        }
+        else
+        {
+            Debug.DrawRay(CheckOnTheGround.position, Vector2.down * raycastLength, Color.red);
+            Invoke("EnemyDead", 0.1f);
+        }
+    }
+
+
+
+
+
+
+
     public void setFacingRight()
     {
         facingRight = !facingRight;

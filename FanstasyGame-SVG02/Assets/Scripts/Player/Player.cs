@@ -219,7 +219,9 @@ public class Player : MonoBehaviour
     public void PlayerJump()
     {
         if (anim.GetBool("PlayerDead")) return;
+
         if (isNotMove) return;
+      
 
         isCheckGrounded = Physics2D.OverlapCircle(checkGround.position, CheckGroundradius, groundLayer);
         if (isCheckGrounded)
@@ -289,8 +291,6 @@ public class Player : MonoBehaviour
     //PlayerAttack
     public void attackPlayers()
     {
-
-
         Collider2D[] hitEnemy = Physics2D.OverlapCircleAll(AttackPoint.position, attackRange, enemyLayer);
         foreach (Collider2D enemy in hitEnemy)
         {
@@ -360,7 +360,7 @@ public class Player : MonoBehaviour
         sliderHealth.value = currentHealth;
         anim.SetTrigger("PlayerHurt");
         isNotMove = true;
-        Invoke("SetBoolHurt", 0.3f);
+        Invoke("SetBoolHurt", 0.9f);
         if (currentHealth <= 0)
         {
             playerDead();
