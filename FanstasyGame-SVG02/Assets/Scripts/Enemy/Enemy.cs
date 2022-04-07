@@ -86,33 +86,32 @@ public class Enemy : MonoBehaviour
         Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
-            //Random Drop Item
-            if (randomItem == 1)
-            {
-                Instantiate(PrefabsItemHealth, PosSpawnHealth.position, PosSpawnHealth.rotation);
-            }
-            else if (randomItem == 5)
-            {
-                Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
-            }
-
-            else if (randomItem == 9)
-            {
-                Instantiate(PrefabsItemHealth, PosSpawnHealth.position, PosSpawnHealth.rotation);
-                Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
-                Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
-            }
-            else
-            {
-                Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
-            }
-
             EnemyDead();
         }
     }
     public void EnemyDead()
     {
-        
+        //Random Drop Item
+        if (randomItem == 1)
+        {
+            Instantiate(PrefabsItemHealth, PosSpawnHealth.position, PosSpawnHealth.rotation);
+        }
+        else if (randomItem == 5)
+        {
+            Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
+        }
+
+        else if (randomItem == 9)
+        {
+            Instantiate(PrefabsItemHealth, PosSpawnHealth.position, PosSpawnHealth.rotation);
+            Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
+            Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
+        }
+        else if (randomItem > 0)
+        {
+            Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
+        }
+
 
         takeExpPlayer();
 
@@ -127,13 +126,17 @@ public class Enemy : MonoBehaviour
     {
         if (anim.GetBool("DeadEnemy")) return;
 
-
         this.distanceAttack = Vector2.Distance(target.position, transform.position);
         if (distanceAttack <= 3)
         {
             if (target.position.x < transform.position.x)
             {
-                if (distanceAttack <= 1) return;
+                if (distanceAttack <= 1)
+                {
+                    anim.SetBool("canWalk", false);
+                    return;
+                }
+                    
                 if (stopMoveEnemy) return;
                 anim.SetBool("canWalk", true);
                 transform.localScale = new Vector3(3f, 3f, 3f);
@@ -144,8 +147,12 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-               
-                if (distanceAttack <= 1) return;
+
+                if (distanceAttack <= 1)
+                {
+                    anim.SetBool("canWalk", false);
+                    return;
+                }
                 if (stopMoveEnemy) return;
                 anim.SetBool("canWalk", true);
                 transform.localScale = new Vector3(-3f, 3f, 3f);

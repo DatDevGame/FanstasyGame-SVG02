@@ -9,6 +9,8 @@ public class ManagerScoreItem : MonoBehaviour
 
     UIManager UI;
     int setGem;
+    AudioSource aus;
+    public AudioClip soundGetItem;
 
 
     private void Awake()
@@ -18,6 +20,7 @@ public class ManagerScoreItem : MonoBehaviour
     void Start()
     {
 
+        aus = GetComponent<AudioSource>();
         UI = FindObjectOfType<UIManager>();
         UI.setScoreGem("x: " + setGem);
     }
@@ -35,6 +38,7 @@ public class ManagerScoreItem : MonoBehaviour
     
     public void ReceiveGem(int Gem)
     {
+        aus.PlayOneShot(soundGetItem);
         setGem += Gem;
         UI.setScoreGem("X: " + setGem);
     }

@@ -81,6 +81,12 @@ public class Player : MonoBehaviour
     AudioSource aus;
     public AudioClip soundRun1;
     public AudioClip soundRun2;
+    public AudioClip soundDash;
+    public AudioClip soundGetItem;
+    public AudioClip soundAttack1;
+    public AudioClip soundAttack2;
+    public AudioClip soundHurt;
+    public AudioClip soundDead;
     
 
     //Create Slider bar
@@ -187,6 +193,7 @@ public class Player : MonoBehaviour
                         if (currentPower <= 0) return;
                         currentPower -= 5;
                         sliderPower.value = currentPower;
+                        aus.PlayOneShot(soundDash);
                         anim.SetFloat("PlayerRuns", -1f);
                         anim.SetBool("PlayerDash", true);
                         this.rb.velocity = Vector2.left * moveDash;
@@ -197,6 +204,7 @@ public class Player : MonoBehaviour
                         if (currentPower <= 0) return;
                         currentPower -= 5;
                         sliderPower.value = currentPower;
+                        aus.PlayOneShot(soundDash);
                         anim.SetFloat("PlayerRuns", -1f);
                         anim.SetBool("PlayerDash", true);
                         this.rb.velocity = Vector2.right * moveDash;
@@ -299,7 +307,7 @@ public class Player : MonoBehaviour
         foreach (Collider2D enemy in hitEnemy)
         {
             Debug.Log("Attack Enemy");
-            enemy.GetComponent<Enemy>().ReceiveDame(50);
+            enemy.GetComponent<Enemy>().ReceiveDame(10);
         }
     }
     public void OnDrawGizmosSelected()
@@ -364,6 +372,17 @@ public class Player : MonoBehaviour
     {
         aus.PlayOneShot(soundRun2);
     }
+    //Sound Attack
+    public void soundAttackFirst()
+    {
+        aus.PlayOneShot(soundAttack1);
+    }
+    public void soundAttackSecond()
+    {
+        aus.PlayOneShot(soundAttack2);
+    }
+
+
 
 
     //Recieve Dame
@@ -373,6 +392,7 @@ public class Player : MonoBehaviour
 
         currentHealth -= dame;
         sliderHealth.value = currentHealth;
+        aus.PlayOneShot(soundHurt);
         anim.SetTrigger("PlayerHurt");
         isNotMove = true;
         Invoke("SetBoolHurt", 0.9f);
@@ -389,6 +409,7 @@ public class Player : MonoBehaviour
     {
         currentHealth -= dameTrap;
         sliderHealth.value = currentHealth;
+        aus.PlayOneShot(soundHurt);
         anim.SetTrigger("PlayerHurt");
         isNotMove = true;
         Invoke("SetBoolHurt", 0.9f);
@@ -401,6 +422,8 @@ public class Player : MonoBehaviour
 
     public void playerDead()
     {
+        aus.Stop();
+        aus.PlayOneShot(soundDead);
         anim.SetBool("PlayerDead", true);
         Destroy(gameObject, 5f);
     }
@@ -422,6 +445,7 @@ public class Player : MonoBehaviour
     //Get mana
     public void Getmana(int receiveMana)
     {
+        aus.PlayOneShot(soundGetItem);
         currentPower += receiveMana;
         sliderPower.value = currentPower;
         if (currentPower >= 100)
@@ -432,6 +456,7 @@ public class Player : MonoBehaviour
 
     public void GetHealth(int receiveHealth)
     {
+        aus.PlayOneShot(soundGetItem);
         currentHealth += receiveHealth;
         sliderHealth.value = currentHealth;
         if (currentHealth >= 100)
