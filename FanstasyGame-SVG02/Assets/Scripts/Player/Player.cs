@@ -77,8 +77,11 @@ public class Player : MonoBehaviour
     float timer;
     float timeDuration;
 
-
-
+    //Sound Player
+    AudioSource aus;
+    public AudioClip soundRun1;
+    public AudioClip soundRun2;
+    
 
     //Create Slider bar
     public Slider sliderHealth;
@@ -87,6 +90,7 @@ public class Player : MonoBehaviour
     {
         ins = this;
 
+        aus = GetComponent<AudioSource>();
         ui = FindObjectOfType<UIManager>();
 
         timeDuration = 3f;
@@ -350,6 +354,17 @@ public class Player : MonoBehaviour
     {
         isNotMove = false;
     }
+
+    //Sound Run
+    public void soundRunLeft()
+    {
+        aus.PlayOneShot(soundRun1);
+    }
+    public void soundRunRight()
+    {
+        aus.PlayOneShot(soundRun2);
+    }
+
 
     //Recieve Dame
     public void receiveDame(int dame)

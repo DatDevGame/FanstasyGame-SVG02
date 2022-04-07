@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 
     Rigidbody2D rb;
     Animator anim;
+    
 
 
     //take EXP for Player
@@ -49,8 +50,10 @@ public class Enemy : MonoBehaviour
     //Check On Ground
     public LayerMask groundLayer;
     public Transform CheckOnTheGround;
-    float raycastLength = 0.5f;
+    float raycastLength = 3f;
 
+
+   
 
     void Start()
     {
@@ -218,7 +221,9 @@ public class Enemy : MonoBehaviour
         stopMoveEnemy = true;
     }
 
-   
+    
+
+
 
 
 }
