@@ -100,6 +100,7 @@ public class Player : MonoBehaviour
         AttackAnimationPlayer();
         PlayerJump();
         PlayerDash();
+
     }
     private void FixedUpdate()
     {
@@ -391,6 +392,6 @@ public class Player : MonoBehaviour
     }
 
 
-
+  
 
 }

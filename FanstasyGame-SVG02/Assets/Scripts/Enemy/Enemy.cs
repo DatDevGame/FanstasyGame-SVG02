@@ -28,6 +28,10 @@ public class Enemy : MonoBehaviour
     public GameObject PrefabsItemMana;
     public Transform PosSpawnMana;
 
+    //Random Create Item When Dead
+    float randomItem;
+
+
     //Create Item health
     public GameObject PrefabsItemHealth;
     public Transform PosSpawnHealth;
@@ -45,7 +49,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        randomItem = Random.Range(1, 10);
+        Debug.Log(randomItem);
     }
     private void FixedUpdate()
     {
@@ -64,9 +69,25 @@ public class Enemy : MonoBehaviour
     }
     public void EnemyDead()
     {
-        Instantiate(PrefabsItemHealth, PosSpawnHealth.position, PosSpawnHealth.rotation);
-        Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
-        Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
+        if (randomItem == 1)
+        {
+            Instantiate(PrefabsItemHealth, PosSpawnHealth.position, PosSpawnHealth.rotation);
+        }
+        else if (randomItem == 3)
+        {
+            Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
+        }
+        else if (randomItem == 5)
+        {
+            Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
+        }
+        else if (randomItem == 7)
+        {
+            Instantiate(PrefabsItemHealth, PosSpawnHealth.position, PosSpawnHealth.rotation);
+            Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
+            Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
+        }
+     
         anim.SetBool("DeadEnemy", true);
         GetComponent<Rigidbody2D>().gravityScale = 0f;
         GetComponent<Collider2D>().enabled = false;
