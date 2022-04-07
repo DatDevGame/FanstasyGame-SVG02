@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
 {
 
     public Text scoreGem;
+
+    public Text LevelPlayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,14 @@ public class UIManager : MonoBehaviour
         if (scoreGem)
         {
             scoreGem.text = txt;
+        }
+    }
+
+    public void setLevelPlayer(string txt)
+    {
+        if (LevelPlayer)
+        {
+            LevelPlayer.text = txt;
         }
     }
 }

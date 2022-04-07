@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+
+    public static Enemy ins;
     Rigidbody2D rb;
     Animator anim;
 
+
+    //take EXP for Player
+    int expPlayer = 10;
 
     //Create Health Enemy
     protected float maxHealth;
@@ -37,6 +42,8 @@ public class Enemy : MonoBehaviour
     public Transform PosSpawnHealth;
     void Start()
     {
+        ins = this;
+
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -50,7 +57,6 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         randomItem = Random.Range(1, 10);
-        Debug.Log(randomItem);
     }
     private void FixedUpdate()
     {
@@ -87,7 +93,9 @@ public class Enemy : MonoBehaviour
             Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
             Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
         }
-     
+
+        takeExpPlayer();
+
         anim.SetBool("DeadEnemy", true);
         GetComponent<Rigidbody2D>().gravityScale = 0f;
         GetComponent<Collider2D>().enabled = false;
@@ -142,6 +150,12 @@ public class Enemy : MonoBehaviour
     {
         this.velocity = Vector2.zero;
         transform.Translate(velocity);
+    }
+
+
+    public void takeExpPlayer()
+    {
+        Player.ins.takeExp(expPlayer);
     }
 
 

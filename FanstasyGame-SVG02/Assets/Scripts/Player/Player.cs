@@ -9,6 +9,12 @@ public class Player : MonoBehaviour
 
     Rigidbody2D rb;
     Animator anim;
+    UIManager ui;
+
+
+    //Level Player
+    int levelPlayer;
+    float expCurrent = 0f;
 
     //Set During Hurt not Move
     bool isNotMove;
@@ -75,6 +81,8 @@ public class Player : MonoBehaviour
     {
         ins = this;
 
+        ui = FindObjectOfType<UIManager>();
+
         maxHealth = 100f;
         currentHealth = maxHealth;
         sliderHealth.maxValue = maxHealth;
@@ -85,6 +93,9 @@ public class Player : MonoBehaviour
         sliderPower.maxValue = maxPower;
         sliderPower.value = maxPower;
 
+        levelPlayer = 1;
+
+        ui.setLevelPlayer("" +levelPlayer);
 
         moveSpeed = 5f;
 
@@ -100,7 +111,7 @@ public class Player : MonoBehaviour
         AttackAnimationPlayer();
         PlayerJump();
         PlayerDash();
-
+        getLevelPlayer();
     }
     private void FixedUpdate()
     {
@@ -392,6 +403,38 @@ public class Player : MonoBehaviour
     }
 
 
-  
+    //Set level Player
+    public void getLevelPlayer()
+    {
+        if (levelPlayer == 1 && expCurrent >= 100)
+        {
+            levelPlayer = 2;
+            ui.setLevelPlayer(""+ levelPlayer);
+            expCurrent = 0f;
+        }
+        else if (levelPlayer == 2 && expCurrent >= 150)
+        {
+            levelPlayer = 3;
+            ui.setLevelPlayer("" + levelPlayer);
+            expCurrent = 0f;
+        }
+        else if (levelPlayer == 3 && expCurrent >= 200)
+        {
+            levelPlayer = 4;
+            ui.setLevelPlayer("" + levelPlayer);
+            expCurrent = 0f;
+
+        }
+        
+    }
+
+
+    //Receive Exp
+    public void takeExp(int exp)
+    {
+        expCurrent += exp;
+        Debug.Log("Exp"+expCurrent);
+    }
+
 
 }
