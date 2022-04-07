@@ -41,7 +41,7 @@ AnimationClip:
       value: {fileID: 8740081516789230483, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
     - time: 1
       value: {fileID: 4245071895355107723, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
-    - time: 2
+    - time: 4
       value: {fileID: 4245071895355107723, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
     attribute: m_Sprite
     path: 
@@ -79,7 +79,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 2.1
+    m_StopTime: 4.1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -98,4 +98,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 3
+    functionName: TimeDead
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

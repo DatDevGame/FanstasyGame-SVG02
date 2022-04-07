@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MeleeEnemy : MonoBehaviour
 {
+    Enemy enemy;
+
     public Transform PosRaycat;
     public LayerMask playLayer;
     [SerializeField] private float lengthRaycat = 5f;
@@ -15,13 +17,19 @@ public class MeleeEnemy : MonoBehaviour
     public Transform attackPoint;
     public float attackRange;
 
+    //Stop Attack when Dead
+    bool stopAttack;
+
    
 
     Animator anim;
 
     private void Start()
     {
+        enemy = FindObjectOfType<Enemy>();
         anim = GetComponent<Animator>();
+
+        stopAttack = false;
     }
     public void TestRaycat()
     {
@@ -34,7 +42,6 @@ public class MeleeEnemy : MonoBehaviour
             {
                 if (Time.time >= nextAttackTime)
                 {
-                    Debug.Log("Hit Player");
                     anim.SetTrigger("AttackEnemy");
                     anim.SetBool("canWalk", false);
                     nextAttackTime = Time.time + 2f / attackRate;
@@ -93,9 +100,5 @@ public class MeleeEnemy : MonoBehaviour
         }
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-
-   
-
-
 
 }

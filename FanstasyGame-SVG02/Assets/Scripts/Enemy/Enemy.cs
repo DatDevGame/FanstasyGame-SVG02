@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
 
     public static Enemy ins;
 
-    public Player player;
 
     Rigidbody2D rb;
     Animator anim;
@@ -40,7 +39,7 @@ public class Enemy : MonoBehaviour
     public Transform PosSpawnMana;
 
     //Random Create Item When Dead
-    float randomItem;
+    int randomItem;
 
 
     //Create Item health
@@ -52,9 +51,6 @@ public class Enemy : MonoBehaviour
 
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-
-        player = FindObjectOfType<Player>();
-
         maxHealth = 100f;
         currentHealth = maxHealth;
 
@@ -83,24 +79,22 @@ public class Enemy : MonoBehaviour
     }
     public void EnemyDead()
     {
-        if (randomItem == 1)
+        if (randomItem == 1 || randomItem == 3)
         {
             Instantiate(PrefabsItemHealth, PosSpawnHealth.position, PosSpawnHealth.rotation);
         }
-        else if (randomItem == 3)
+        else if (randomItem == 5 || randomItem == 7)
         {
             Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
         }
-        else if (randomItem == 5)
-        {
-            Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
-        }
-        else if (randomItem == 7)
+        
+        else if (randomItem == 9)
         {
             Instantiate(PrefabsItemHealth, PosSpawnHealth.position, PosSpawnHealth.rotation);
             Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
             Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
         }
+        Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
 
         takeExpPlayer();
 

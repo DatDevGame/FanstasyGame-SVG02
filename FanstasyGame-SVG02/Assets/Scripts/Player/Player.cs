@@ -73,6 +73,12 @@ public class Player : MonoBehaviour
     float currentPower;
 
 
+    //Time Stop Screen
+    float timer;
+    float timeDuration;
+
+
+
 
     //Create Slider bar
     public Slider sliderHealth;
@@ -82,6 +88,9 @@ public class Player : MonoBehaviour
         ins = this;
 
         ui = FindObjectOfType<UIManager>();
+
+        timeDuration = 3f;
+        timer = timeDuration;
 
         maxHealth = 100f;
         currentHealth = maxHealth;
@@ -111,6 +120,7 @@ public class Player : MonoBehaviour
         AttackAnimationPlayer();
         PlayerJump();
         PlayerDash();
+        TimeDead();
         getLevelPlayer();
     }
     private void FixedUpdate()
@@ -370,7 +380,6 @@ public class Player : MonoBehaviour
         if (currentHealth <= 0)
         {
             playerDead();
-
         }
     }
 
@@ -378,7 +387,21 @@ public class Player : MonoBehaviour
     public void playerDead()
     {
         anim.SetBool("PlayerDead", true);
-        Destroy(gameObject, 2);
+        Destroy(gameObject, 5f);
+    }
+
+    public void TimeDead()
+    {
+        if (currentHealth <= 0)
+        {
+            timer -= Time.deltaTime;
+            Debug.Log(timer);
+            if (timer <= 0)
+            {
+                Time.timeScale = 0f;
+            }
+        }
+
     }
 
     //Get mana
@@ -435,6 +458,4 @@ public class Player : MonoBehaviour
         expCurrent += exp;
         Debug.Log("Exp"+expCurrent);
     }
-
-
 }
