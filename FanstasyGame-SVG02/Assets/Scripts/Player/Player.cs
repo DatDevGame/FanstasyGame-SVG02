@@ -350,7 +350,7 @@ public class Player : MonoBehaviour
         sliderHealth.value = currentHealth;
         anim.SetTrigger("PlayerHurt");
         isNotMove = true;
-        Invoke("SetBoolHurt", 0.9f);
+        Invoke("SetBoolHurt", 0.3f);
         if (currentHealth <= 0)
         {
             playerDead();

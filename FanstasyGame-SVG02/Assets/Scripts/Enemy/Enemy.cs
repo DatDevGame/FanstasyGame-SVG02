@@ -6,6 +6,9 @@ public class Enemy : MonoBehaviour
 {
 
     public static Enemy ins;
+
+    public Player player;
+
     Rigidbody2D rb;
     Animator anim;
 
@@ -24,6 +27,9 @@ public class Enemy : MonoBehaviour
     Vector2 velocity = new Vector2();
     float distanceAttack;
     bool facingRight;
+
+    //Stop move when Enemy Attack
+    bool stopMoveEnemy;
 
     //Create Item when Enemy Dead
     public GameObject PrefabsItems;
@@ -46,6 +52,8 @@ public class Enemy : MonoBehaviour
 
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+        player = FindObjectOfType<Player>();
 
         maxHealth = 100f;
         currentHealth = maxHealth;
@@ -106,12 +114,16 @@ public class Enemy : MonoBehaviour
     //Check Distance Attack
     public void EnemyMove()
     {
+        if (anim.GetBool("DeadEnemy")) return;
+
+
         this.distanceAttack = Vector2.Distance(target.position, transform.position);
         if (distanceAttack <= 3)
         {
             if (target.position.x < transform.position.x)
             {
                 if (distanceAttack <= 1) return;
+                if (stopMoveEnemy) return;
                 anim.SetBool("canWalk", true);
                 transform.localScale = new Vector3(3f, 3f, 3f);
                 this.velocity = Vector2.left * speedMove * Time.deltaTime;
@@ -123,6 +135,7 @@ public class Enemy : MonoBehaviour
             {
                
                 if (distanceAttack <= 1) return;
+                if (stopMoveEnemy) return;
                 anim.SetBool("canWalk", true);
                 transform.localScale = new Vector3(-3f, 3f, 3f);
                 this.velocity = Vector2.right * speedMove * Time.deltaTime;
@@ -158,6 +171,16 @@ public class Enemy : MonoBehaviour
         Player.ins.takeExp(expPlayer);
     }
 
+     public void setStopMoveEnemyFalse()
+    {
+        stopMoveEnemy = false;
+    }
+    public void setStopMoveEnemyTrue()
+    {
+        stopMoveEnemy = true;
+    }
+
+   
 
 
 }

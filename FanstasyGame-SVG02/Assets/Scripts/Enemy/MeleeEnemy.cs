@@ -15,6 +15,8 @@ public class MeleeEnemy : MonoBehaviour
     public Transform attackPoint;
     public float attackRange;
 
+   
+
     Animator anim;
 
     private void Start()
@@ -23,6 +25,8 @@ public class MeleeEnemy : MonoBehaviour
     }
     public void TestRaycat()
     {
+        if (anim.GetBool("DeadEnemy")) return;
+
         RaycastHit2D hit1 = Physics2D.Raycast(PosRaycat.position, Vector2.left, lengthRaycat, playLayer);
         if (hit1.collider != null)
         {
@@ -90,6 +94,8 @@ public class MeleeEnemy : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
+   
 
-    
+
+
 }
