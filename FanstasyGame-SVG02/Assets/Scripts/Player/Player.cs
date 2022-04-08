@@ -360,7 +360,6 @@ public class Player : MonoBehaviour
                 {
                     anim.SetTrigger("PlayerAttack");
                     this.pressHorizontal = 0f;
-                    attackPlayers();
                     nextAttackTime = Time.time + 2f / attackRate;
                 }
 
