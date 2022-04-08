@@ -94,22 +94,22 @@ public class Enemy : MonoBehaviour
         //Random Drop Item
         if (randomItem == 1)
         {
-            Instantiate(PrefabsItemHealth, PosSpawnHealth.position, PosSpawnHealth.rotation);
+            Instantiate(PrefabsItemHealth, PosSpawnHealth.position, Quaternion.identity);
         }
         else if (randomItem == 5)
         {
-            Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
+            Instantiate(PrefabsItemMana, PosSpawnMana.position, Quaternion.identity);
         }
 
         else if (randomItem == 9)
         {
-            Instantiate(PrefabsItemHealth, PosSpawnHealth.position, PosSpawnHealth.rotation);
-            Instantiate(PrefabsItemMana, PosSpawnMana.position, PosSpawnMana.rotation);
-            Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
+            Instantiate(PrefabsItemHealth, PosSpawnHealth.position, Quaternion.identity);
+            Instantiate(PrefabsItemMana, PosSpawnMana.position, Quaternion.identity);
+            Instantiate(PrefabsItems, PosSpawn.position, Quaternion.identity);
         }
         else if (randomItem > 0)
         {
-            Instantiate(PrefabsItems, PosSpawn.position, transform.rotation);
+            Instantiate(PrefabsItems, PosSpawn.position, Quaternion.identity);
         }
 
 

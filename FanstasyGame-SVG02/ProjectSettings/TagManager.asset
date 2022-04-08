@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - WallGround
   - ItemGem
+  - ChestTx
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - enemyLayer
   - playerLayer
   - groundLayer
-  - 
+  - chestTxLayer
   - 
   - 
   - 

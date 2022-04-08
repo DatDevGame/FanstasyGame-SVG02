@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
     UIManager ui;
+    ChestTx chestTx;
 
 
     //Level Player
@@ -65,6 +66,13 @@ public class Player : MonoBehaviour
     public float attackRate = 0.5f;
     float nextAttackTime = 0f;
 
+    //Attack ChestTx
+    public Transform AttackPointChestTx;
+    float PointRadiusChestTx = 0.01f;
+    public LayerMask ChestTxLayer;
+    bool hitChestTX;
+    bool checkOnChestTx;
+
     //Heal Player and Power
     float maxHealth;
     float currentHealth;
@@ -98,6 +106,7 @@ public class Player : MonoBehaviour
 
         aus = GetComponent<AudioSource>();
         ui = FindObjectOfType<UIManager>();
+        chestTx = FindObjectOfType<ChestTx>();
 
         timeDuration = 3f;
         timer = timeDuration;
@@ -132,6 +141,7 @@ public class Player : MonoBehaviour
         PlayerDash();
         TimeDead();
         getLevelPlayer();
+        attackChextTx();
     }
     private void FixedUpdate()
     {
@@ -233,10 +243,10 @@ public class Player : MonoBehaviour
         if (anim.GetBool("PlayerDead")) return;
 
         if (isNotMove) return;
-      
 
+        checkOnChestTx = Physics2D.OverlapCircle(checkGround.position, CheckGroundradius, ChestTxLayer);
         isCheckGrounded = Physics2D.OverlapCircle(checkGround.position, CheckGroundradius, groundLayer);
-        if (isCheckGrounded)
+        if (isCheckGrounded || checkOnChestTx)
         {
             isGrounded = true;
             anim.SetBool("PlayerJump", false);
@@ -310,6 +320,7 @@ public class Player : MonoBehaviour
             enemy.GetComponent<Enemy>().ReceiveDame(10);
         }
     }
+
     public void OnDrawGizmosSelected()
     {
         if (AttackPoint == null)
@@ -318,6 +329,22 @@ public class Player : MonoBehaviour
         }
         Gizmos.DrawWireSphere(AttackPoint.position, attackRange);
     }
+
+    //Attack ChestTx
+    public void attackChextTx()
+    {
+        hitChestTX = Physics2D.OverlapCircle(AttackPointChestTx.position, PointRadiusChestTx, ChestTxLayer);
+        if (hitChestTX)
+        {
+            chestTx.openChestTX(1);
+            Debug.Log("Chest");
+        }
+        else return;
+    }
+
+
+
+
     public void AttackAnimationPlayer()
     {
         if (anim.GetBool("PlayerDead")) return;
@@ -422,7 +449,7 @@ public class Player : MonoBehaviour
 
     public void playerDead()
     {
-        aus.Stop();
+        aus.Stop();         
         aus.PlayOneShot(soundDead);
         anim.SetBool("PlayerDead", true);
         Destroy(gameObject, 5f);
