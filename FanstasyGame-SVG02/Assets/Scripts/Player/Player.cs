@@ -336,10 +336,9 @@ public class Player : MonoBehaviour
         hitChestTX = Physics2D.OverlapCircle(AttackPointChestTx.position, PointRadiusChestTx, ChestTxLayer);
         if (hitChestTX)
         {
-            chestTx.openChestTX(1);
+            ChestTx.ins.openChestTX(1);
             Debug.Log("Chest");
         }
-        else return;
     }
 
 

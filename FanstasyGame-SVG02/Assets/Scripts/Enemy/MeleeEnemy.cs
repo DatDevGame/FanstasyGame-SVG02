@@ -17,8 +17,6 @@ public class MeleeEnemy : MonoBehaviour
     public Transform attackPoint;
     public float attackRange;
 
-    //Stop Attack when Dead
-    bool stopAttack;
 
    
 
@@ -28,8 +26,6 @@ public class MeleeEnemy : MonoBehaviour
     {
         enemy = FindObjectOfType<Enemy>();
         anim = GetComponent<Animator>();
-
-        stopAttack = false;
     }
     public void TestRaycat()
     {

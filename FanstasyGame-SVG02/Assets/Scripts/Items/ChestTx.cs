@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ChestTx : MonoBehaviour
 {
+    public static ChestTx ins;
+
     Animator anim;
     AudioSource aus;
     public AudioClip soundOpenChestTx; 
@@ -21,6 +23,7 @@ public class ChestTx : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ins = this;
         aus = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
     }
@@ -42,6 +45,7 @@ public class ChestTx : MonoBehaviour
             Instantiate(HealthPrefabs, posSpawnHealth.position, Quaternion.identity);
             anim.SetTrigger("OpenChestTx");
             GetComponent<Collider2D>().enabled = false;
+            Destroy(gameObject, 5f);
         }
     }
 }
