@@ -16864,10 +16864,6 @@ MonoBehaviour:
     m_Bits: 64
   dameEnemy: 100
   attackRate: 2
-  AttackPointChestTx: {fileID: 1454633934}
-  ChestTxLayer:
-    serializedVersion: 2
-    m_Bits: 512
   soundRun1: {fileID: 8300000, guid: 603409628c28b44468ea72fde0cf402c, type: 3}
   soundRun2: {fileID: 8300000, guid: 09795cd9221c7f247a9ae1f864d04300, type: 3}
   soundDash: {fileID: 8300000, guid: 6295004f190bfd144b30470c38197222, type: 3}
@@ -22693,7 +22689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f25eae05f72961438000b8d8eb13337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChestPrefabs: {fileID: 8837320724205200321, guid: c643271ef9b0aed4c87a3cedd50eb146, type: 3}
+  ChestPrefabs: {fileID: 5534038215855831194, guid: c643271ef9b0aed4c87a3cedd50eb146, type: 3}
 --- !u!4 &1213134567
 Transform:
   m_ObjectHideFlags: 0

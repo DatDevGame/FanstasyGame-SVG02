@@ -23,6 +23,9 @@ public class ChestTx : MonoBehaviour
     public LayerMask playerLayer;
 
 
+    public GameObject ShowpressOchest;
+
+
 
     bool openChest;
     // Start is called before the first frame update
@@ -60,6 +63,8 @@ public class ChestTx : MonoBehaviour
             {
                 openChestTX();
             }
+
+            ShowpressOchest.SetActive(true);
         }
     }
     
