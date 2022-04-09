@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
     UIManager ui;
-    ChestTx chestTx;
 
 
     //Level Player
@@ -62,6 +61,7 @@ public class Player : MonoBehaviour
     public float attackRange = 0.5f;
     public LayerMask enemyLayer;
     bool stopMoveAttack = false;
+    public int dameEnemy = 100;
 
     public float attackRate = 0.5f;
     float nextAttackTime = 0f;
@@ -106,7 +106,6 @@ public class Player : MonoBehaviour
 
         aus = GetComponent<AudioSource>();
         ui = FindObjectOfType<UIManager>();
-        chestTx = FindObjectOfType<ChestTx>();
 
         timeDuration = 3f;
         timer = timeDuration;
@@ -317,7 +316,7 @@ public class Player : MonoBehaviour
         foreach (Collider2D enemy in hitEnemy)
         {
             Debug.Log("Attack Enemy");
-            enemy.GetComponent<Enemy>().ReceiveDame(10);
+            enemy.GetComponent<Enemy>().ReceiveDame(dameEnemy);
         }
     }
 

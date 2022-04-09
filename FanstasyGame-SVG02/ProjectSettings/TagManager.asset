@@ -9,6 +9,8 @@ TagManager:
   - WallGround
   - ItemGem
   - ChestTx
+  - wayPoint1
+  - wayPoint2
   layers:
   - Default
   - TransparentFX

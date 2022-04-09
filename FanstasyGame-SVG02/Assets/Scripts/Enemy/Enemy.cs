@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
     public Transform target;
     public float speedMove;
     Vector2 velocity = new Vector2();
-    float distanceAttack;
+    public float distanceAttack;
     bool facingRight;
 
     //Stop move when Enemy Attack
@@ -107,10 +107,8 @@ public class Enemy : MonoBehaviour
             Instantiate(PrefabsItemMana, PosSpawnMana.position, Quaternion.identity);
             Instantiate(PrefabsItems, PosSpawn.position, Quaternion.identity);
         }
-        else if (randomItem > 0)
-        {
-            Instantiate(PrefabsItems, PosSpawn.position, Quaternion.identity);
-        }
+
+        Instantiate(PrefabsItems, PosSpawn.position, Quaternion.identity);
 
 
         takeExpPlayer();
@@ -127,7 +125,7 @@ public class Enemy : MonoBehaviour
         if (anim.GetBool("DeadEnemy")) return;
 
         this.distanceAttack = Vector2.Distance(target.position, transform.position);
-        if (distanceAttack <= 3)
+        if (distanceAttack <= 5)
         {
             if (target.position.x < transform.position.x)
             {
@@ -147,12 +145,6 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-
-                if (distanceAttack <= 1)
-                {
-                    anim.SetBool("canWalk", false);
-                    return;
-                }
                 if (stopMoveEnemy) return;
                 anim.SetBool("canWalk", true);
                 transform.localScale = new Vector3(-3f, 3f, 3f);
@@ -163,10 +155,6 @@ public class Enemy : MonoBehaviour
 
             }
 
-        }
-        else
-        {
-            anim.SetBool("canWalk", false);
         }
     }
 

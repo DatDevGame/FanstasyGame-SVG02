@@ -22,7 +22,7 @@ public class ManagerScoreItem : MonoBehaviour
 
         aus = GetComponent<AudioSource>();
         UI = FindObjectOfType<UIManager>();
-        UI.setScoreGem("x: " + setGem);
+        UI.setScoreGem("X: " + setGem);
     }
 
     // Update is called once per frame
