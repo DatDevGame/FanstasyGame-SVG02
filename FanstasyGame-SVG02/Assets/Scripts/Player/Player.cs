@@ -66,13 +66,6 @@ public class Player : MonoBehaviour
     public float attackRate = 0.5f;
     float nextAttackTime = 0f;
 
-    //Attack ChestTx
-    public Transform AttackPointChestTx;
-    float PointRadiusChestTx = 0.01f;
-    public LayerMask ChestTxLayer;
-    bool hitChestTX;
-    bool checkOnChestTx;
-
     //Heal Player and Power
     float maxHealth;
     float currentHealth;
@@ -140,7 +133,7 @@ public class Player : MonoBehaviour
         PlayerDash();
         TimeDead();
         getLevelPlayer();
-        attackChextTx();
+        //attackChextTx();
     }
     private void FixedUpdate()
     {
@@ -243,9 +236,8 @@ public class Player : MonoBehaviour
 
         if (isNotMove) return;
 
-        checkOnChestTx = Physics2D.OverlapCircle(checkGround.position, CheckGroundradius, ChestTxLayer);
         isCheckGrounded = Physics2D.OverlapCircle(checkGround.position, CheckGroundradius, groundLayer);
-        if (isCheckGrounded || checkOnChestTx)
+        if (isCheckGrounded)
         {
             isGrounded = true;
             anim.SetBool("PlayerJump", false);
@@ -330,15 +322,15 @@ public class Player : MonoBehaviour
     }
 
     //Attack ChestTx
-    public void attackChextTx()
-    {
-        hitChestTX = Physics2D.OverlapCircle(AttackPointChestTx.position, PointRadiusChestTx, ChestTxLayer);
-        if (hitChestTX)
-        {
-            ChestTx.ins.openChestTX(1);
-            Debug.Log("Chest");
-        }
-    }
+    //public void attackChextTx()
+    //{
+    //    hitChestTX = Physics2D.OverlapCircle(AttackPointChestTx.position, PointRadiusChestTx, ChestTxLayer);
+    //    if (hitChestTX)
+    //    {
+    //        ChestTx.ins.openChestTX(1);
+    //        Debug.Log("Chest");
+    //    }
+    //}
 
 
 
@@ -522,4 +514,7 @@ public class Player : MonoBehaviour
         expCurrent += exp;
         Debug.Log("Exp"+expCurrent);
     }
+
+    
+
 }

@@ -19,7 +19,12 @@ public class ChestTx : MonoBehaviour
     public Transform posSpawnMana;
     public Transform posSpawnHealth;
 
+    public float radius = 1f;
+    public LayerMask playerLayer;
 
+
+
+    bool openChest;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,21 +36,31 @@ public class ChestTx : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        circleZoneOpenChest();
     }
 
-    public void openChestTX(int dame)
+    public void openChestTX()
     {
-        currentHealth -= dame;
-        if (currentHealth <= 0)
+        aus.PlayOneShot(soundOpenChestTx);
+        Instantiate(GemPrefabs, posSpawnGem.position, Quaternion.identity);
+        Instantiate(ManaPrefabs, posSpawnMana.position, Quaternion.identity);
+        Instantiate(HealthPrefabs, posSpawnHealth.position, Quaternion.identity);
+        anim.SetTrigger("OpenChestTx");
+        GetComponent<Collider2D>().enabled = false;
+        Destroy(gameObject, 5f);
+    }
+
+    public void circleZoneOpenChest()
+    {
+        openChest = Physics2D.OverlapCircle(transform.position, radius, playerLayer);
+
+        if (openChest)
         {
-            aus.PlayOneShot(soundOpenChestTx);
-            Instantiate(GemPrefabs, posSpawnGem.position, Quaternion.identity);
-            Instantiate(ManaPrefabs, posSpawnMana.position, Quaternion.identity);
-            Instantiate(HealthPrefabs, posSpawnHealth.position, Quaternion.identity);
-            anim.SetTrigger("OpenChestTx");
-            GetComponent<Collider2D>().enabled = false;
-            Destroy(gameObject, 5f);
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                openChestTX();
+            }
         }
     }
+    
 }

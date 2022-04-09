@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour
     {
         if (randPosSpawn == 1)
         {
-            randPos = new Vector2(39.08f, 1.05f);
+            randPos = new Vector2(50.08f, 1.05f);
         }
         else if (randPosSpawn == 2)
         {
