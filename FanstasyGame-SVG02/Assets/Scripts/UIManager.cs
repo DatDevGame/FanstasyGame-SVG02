@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-
+    //Start Game
     public Text scoreGem;
-
     public Text LevelPlayer;
-    // Start is called before the first frame update
+
+
+    //OpTion GUI Manager
+    public GameObject showTutorial;
+    bool setBoolTutorial = false;
+
     void Start()
     {
-        
+        showTutorial.SetActive(false);
     }
 
     // Update is called once per frame
@@ -36,4 +41,32 @@ public class UIManager : MonoBehaviour
             LevelPlayer.text = txt;
         }
     }
+
+    //OpTion GUI Manager
+    public void buttonStart()
+    {
+        SceneManager.LoadScene("Map-1-Scene");
+    }
+
+    public void buttonTutorial()
+    {
+        if (setBoolTutorial == false)
+        {
+            showTutorial.SetActive(true);
+            setBoolTutorial = true;
+        }
+        else
+        {
+            showTutorial.SetActive(false);
+            setBoolTutorial = false;
+        }
+
+    }
+
+    public void quitOption()
+    {
+        Application.Quit();
+    }
+
+   
 }
