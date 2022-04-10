@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     Animator anim;
     UIManager ui;
 
+    //Show PanelDead
+    public GameObject panelDeadShow;
+
 
     //Level Player
     int levelPlayer;
@@ -68,7 +71,7 @@ public class Player : MonoBehaviour
 
     //Heal Player and Power
     float maxHealth;
-    float currentHealth;
+    public float currentHealth;
 
     float maxPower;
     float currentPower;
@@ -103,7 +106,7 @@ public class Player : MonoBehaviour
         timeDuration = 3f;
         timer = timeDuration;
 
-        maxHealth = 100f;
+        maxHealth = 1f;
         currentHealth = maxHealth;
         sliderHealth.maxValue = maxHealth;
         sliderHealth.value = maxHealth;
@@ -131,7 +134,7 @@ public class Player : MonoBehaviour
         AttackAnimationPlayer();
         PlayerJump();
         PlayerDash();
-        TimeDead();
+        //TimeDead();
         getLevelPlayer();
         //attackChextTx();
     }
@@ -321,20 +324,6 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(AttackPoint.position, attackRange);
     }
 
-    //Attack ChestTx
-    //public void attackChextTx()
-    //{
-    //    hitChestTX = Physics2D.OverlapCircle(AttackPointChestTx.position, PointRadiusChestTx, ChestTxLayer);
-    //    if (hitChestTX)
-    //    {
-    //        ChestTx.ins.openChestTX(1);
-    //        Debug.Log("Chest");
-    //    }
-    //}
-
-
-
-
     public void AttackAnimationPlayer()
     {
         if (anim.GetBool("PlayerDead")) return;
@@ -442,20 +431,7 @@ public class Player : MonoBehaviour
         aus.PlayOneShot(soundDead);
         anim.SetBool("PlayerDead", true);
         Destroy(gameObject, 5f);
-    }
-
-    public void TimeDead()
-    {
-        if (currentHealth <= 0)
-        {
-            timer -= Time.deltaTime;
-            Debug.Log(timer);
-            if (timer <= 0)
-            {
-                Time.timeScale = 0f;
-            }
-        }
-
+        panelDeadShow.SetActive(true);
     }
 
     //Get mana

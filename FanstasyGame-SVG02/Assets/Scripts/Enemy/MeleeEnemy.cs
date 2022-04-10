@@ -29,6 +29,8 @@ public class MeleeEnemy : MonoBehaviour
     }
     public void TestRaycat()
     {
+        if (Player.ins.currentHealth <= 0) return;
+
         if (anim.GetBool("DeadEnemy")) return;
 
         RaycastHit2D hit1 = Physics2D.Raycast(PosRaycat.position, Vector2.left, lengthRaycat, playLayer);

@@ -10,8 +10,9 @@ public class Enemy : MonoBehaviour
 
     Rigidbody2D rb;
     Animator anim;
-    
 
+    //Sound Enemy
+    
 
     //take EXP for Player
     int expPlayer = 10;
@@ -58,7 +59,6 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         ins = this;
-
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         maxHealth = 100f;
@@ -123,6 +123,8 @@ public class Enemy : MonoBehaviour
     public void EnemyMove()
     {
         if (anim.GetBool("DeadEnemy")) return;
+        if (Player.ins.currentHealth <= 0) anim.SetBool("canWalk", false);
+        if (Player.ins.currentHealth <= 0) return;
 
         this.distanceAttack = Vector2.Distance(target.position, transform.position);
         if (distanceAttack <= 5)

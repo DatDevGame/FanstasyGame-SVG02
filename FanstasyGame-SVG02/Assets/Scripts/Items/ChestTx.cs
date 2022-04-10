@@ -9,9 +9,6 @@ public class ChestTx : MonoBehaviour
     Animator anim;
     AudioSource aus;
     public AudioClip soundOpenChestTx; 
-
-
-    float currentHealth = 1f;
     public GameObject GemPrefabs;
     public GameObject ManaPrefabs;
     public GameObject HealthPrefabs;
