@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
     public Transform AttackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayer;
+    public LayerMask enemyTrapLayer;
     bool stopMoveAttack = false;
     public int dameEnemy = 100;
 
@@ -310,8 +311,15 @@ public class Player : MonoBehaviour
         Collider2D[] hitEnemy = Physics2D.OverlapCircleAll(AttackPoint.position, attackRange, enemyLayer);
         foreach (Collider2D enemy in hitEnemy)
         {
-            Debug.Log("Attack Enemy");
-            enemy.GetComponent<Enemy>().ReceiveDame(dameEnemy);
+            if (enemy.tag == "Enemy")
+            {
+                enemy.GetComponent<Enemy>().ReceiveDame(dameEnemy);
+            }
+            else if (enemy.tag == "EnemyTrap")
+            {
+                enemy.GetComponent<EnemyTrap>().receiveDame(dameEnemy);
+            }
+          
         }
     }
 

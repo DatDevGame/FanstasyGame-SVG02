@@ -12,6 +12,10 @@ public class EnemyTrap : MonoBehaviour
     public int dameEnemyTrap;
 
 
+    public float currentHealth;
+    float maxHealth;
+
+
     //Raycast
     public Transform posRaycast;
     public float lengthRaycast = 1.5f;
@@ -23,6 +27,8 @@ public class EnemyTrap : MonoBehaviour
 
     float distance;
     float speedMove = 4f;
+
+    bool stopWhenAttack;
 
 
     //BoxCat
@@ -40,6 +46,9 @@ public class EnemyTrap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        maxHealth = 1f;
+        currentHealth = maxHealth;
+
         anim = GetComponent<Animator>();
     }
 
@@ -105,7 +114,7 @@ public class EnemyTrap : MonoBehaviour
 
     public void facingTarget()
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("EnemyTrapAttack")) return;
+        if (stopWhenAttack) return;
         if (transform.position.x > target.position.x)
         {
             transform.localScale = new Vector2(3f, 3f);
@@ -124,8 +133,15 @@ public class EnemyTrap : MonoBehaviour
         {
             if (boxCheck.collider.tag == "Player")
             {
-                if (distance <= 2) return;
+                if (distance <= 2)
+                {
+                    anim.SetBool("EnemyTrapWalk", false);
+                    return;
+                }
+                if (stopWhenAttack) return;
+
                 transform.position = Vector2.MoveTowards(transform.position, target.position, speedMove * Time.deltaTime);
+                anim.SetBool("EnemyTrapWalk", true);
             }
         }
     }
@@ -134,4 +150,30 @@ public class EnemyTrap : MonoBehaviour
     {
         Gizmos.DrawWireCube(BoxCast.position, new Vector2(posXBox, posYBox));
     }
+
+    public void receiveDame(int dame)
+    {
+        currentHealth -= dame;
+        if (currentHealth <= 0)
+        {
+            dead();
+        }
+    }
+    public void dead()
+    {
+        anim.SetBool("EnemyTrapDead", true);
+        Destroy(gameObject, 2f);
+    }
+
+
+    public void setStopMoveWhenAttackTrue()
+    {
+        stopWhenAttack = true;
+    }
+    public void setStopMoveWhenAttackfalse()
+    {
+        stopWhenAttack = false;
+    }
+
+
 }

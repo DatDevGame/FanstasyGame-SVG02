@@ -11,6 +11,7 @@ TagManager:
   - ChestTx
   - wayPoint1
   - wayPoint2
+  - EnemyTrap
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - playerLayer
   - groundLayer
   - chestTxLayer
-  - 
+  - enemyTrapLayer
   - 
   - 
   - 

@@ -15961,7 +15961,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 67.59, y: 24.79, z: -10}
+  m_LocalPosition: {x: 67.3, y: 23.35, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1454685732}
@@ -28325,6 +28325,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  enemyTrapLayer:
+    serializedVersion: 2
+    m_Bits: 0
   dameEnemy: 100
   attackRate: 2
   currentHealth: 0
@@ -28453,7 +28456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902526138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 67.59, y: 21.44, z: 0}
+  m_LocalPosition: {x: 67.3, y: 20, z: 0}
   m_LocalScale: {x: 3.689011, y: 3.783299, z: 1}
   m_Children:
   - {fileID: 1413060143}
@@ -29740,9 +29743,9 @@ GameObject:
   - component: {fileID: 949516965}
   - component: {fileID: 949516970}
   - component: {fileID: 949516971}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyTrap
-  m_TagString: Untagged
+  m_TagString: EnemyTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29791,7 +29794,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.06454365, y: -0.34039104}
+    - - {x: -0.089934275, y: -0.27268332}
       - {x: -0.11952023, y: -0.4025858}
       - {x: -0.17272255, y: -0.43227687}
       - {x: -0.21960957, y: -0.46012992}
@@ -29801,7 +29804,7 @@ PolygonCollider2D:
       - {x: 0.13446867, y: -0.45204654}
       - {x: 0.09483524, y: -0.42395574}
       - {x: 0.044229463, y: -0.37807766}
-      - {x: -0.0026622526, y: -0.33279347}
+      - {x: 0.031191915, y: -0.27072835}
 --- !u!61 &949516967
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -29913,6 +29916,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   dameEnemyTrap: 20
+  currentHealth: 0
   posRaycast: {fileID: 320468278}
   lengthRaycast: 1.5
   target: {fileID: 902526144}
@@ -37754,7 +37758,7 @@ GameObject:
   - component: {fileID: 1181745954}
   - component: {fileID: 1181745953}
   - component: {fileID: 1181745955}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TX Tileset Ground_67
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59579,7 +59583,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2011185016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 67.59, y: 24.79, z: -10}
+  m_LocalPosition: {x: 67.3, y: 23.35, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1233427145}
