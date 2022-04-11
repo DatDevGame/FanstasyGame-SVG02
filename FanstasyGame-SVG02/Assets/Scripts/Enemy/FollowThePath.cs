@@ -8,6 +8,10 @@ public class FollowThePath : MonoBehaviour
     int directionMove = 1;
     public float moveSpeed;
     Animator anim;
+
+    float distance;
+    public Transform target;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +31,11 @@ public class FollowThePath : MonoBehaviour
 
     public void moveWayPoint()
     {
-        if (Enemy.ins.distanceAttack <= 5) return;
+        distance = Vector2.Distance(transform.position, target.position);
+
+        if (distance <= 5) return;
+        if (Player.ins.currentHealth <= 0) return;
+
         this.velocity = Vector2.right * directionMove * moveSpeed * Time.deltaTime;
         transform.Translate(velocity);
         anim.SetBool("canWalk", true);

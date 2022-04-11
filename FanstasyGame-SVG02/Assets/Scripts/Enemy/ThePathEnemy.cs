@@ -14,6 +14,11 @@ public class ThePathEnemy : MonoBehaviour
     private void Update()
     {
         Move();
+
+        if (target == null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Move()
