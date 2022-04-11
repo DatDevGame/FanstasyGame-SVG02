@@ -133,7 +133,7 @@ public class EnemyTrap : MonoBehaviour
         {
             if (boxCheck.collider.tag == "Player")
             {
-                if (distance <= 2)
+                if (distance <= 1.5f)
                 {
                     anim.SetBool("EnemyTrapWalk", false);
                     return;
