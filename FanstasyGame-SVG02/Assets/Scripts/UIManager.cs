@@ -12,18 +12,15 @@ public class UIManager : MonoBehaviour
 
 
     //OpTion GUI Manager
-    public GameObject showTutorial;
-    bool setBoolTutorial = false;
 
     void Start()
     {
-        showTutorial.SetActive(false);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void setScoreGem(string txt)
@@ -42,31 +39,5 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    //OpTion GUI Manager
-    public void buttonStart()
-    {
-        SceneManager.LoadScene("Map-1-Scene");
-    }
-
-    public void buttonTutorial()
-    {
-        if (setBoolTutorial == false)
-        {
-            showTutorial.SetActive(true);
-            setBoolTutorial = true;
-        }
-        else
-        {
-            showTutorial.SetActive(false);
-            setBoolTutorial = false;
-        }
-
-    }
-
-    public void quitOption()
-    {
-        Application.Quit();
-    }
-
-   
+    
 }
