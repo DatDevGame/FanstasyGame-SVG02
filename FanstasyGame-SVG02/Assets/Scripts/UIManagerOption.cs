@@ -8,10 +8,14 @@ public class UIManagerOption : MonoBehaviour
 {
 
     public GameObject showTutorial;
+
+    public GameObject showMusicOption;
+    bool showMuic = true;
     // Start is called before the first frame update
 
     private void Awake()
     {
+        showMusicOption.SetActive(false);
         showTutorial.SetActive(false);
     }
     void Start()
@@ -44,5 +48,19 @@ public class UIManagerOption : MonoBehaviour
     public void quitOption()
     {
         Application.Quit();
+    }
+
+    public void SetShowMusicOption()
+    {
+        if (showMuic)
+        {
+            showMusicOption.SetActive(true);
+            showMuic = false;
+        }
+        else
+        {
+            showMusicOption.SetActive(false);
+            showMuic = true;
+        }
     }
 }
