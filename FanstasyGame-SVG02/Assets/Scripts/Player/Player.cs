@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
         timeDuration = 3f;
         timer = timeDuration;
 
-        maxHealth = 100f;
+        maxHealth = 10f;
         currentHealth = maxHealth;
         sliderHealth.maxValue = maxHealth;
         sliderHealth.value = maxHealth;

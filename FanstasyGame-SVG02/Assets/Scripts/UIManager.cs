@@ -76,6 +76,7 @@ public class UIManager : MonoBehaviour
 
     public void ResumeMenu()
     {
+        showVolume.SetActive(false);
         showMenu.SetActive(false);
         Time.timeScale = 1f;
     }

@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
 
     //Enemy Movement
     public Transform target;
-    public float speedMove;
+    public float speedMove = 5f;
     Vector2 velocity = new Vector2();
     public float distanceAttack;
     bool facingRight;
@@ -48,14 +48,6 @@ public class Enemy : MonoBehaviour
     public GameObject PrefabsItemHealth;
     public Transform PosSpawnHealth;
 
-    //Check On Ground
-    public LayerMask groundLayer;
-    public Transform CheckOnTheGround;
-    float raycastLength = 3f;
-
-
-   
-
     void Start()
     {
         ins = this;
@@ -71,7 +63,6 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         randomItem = Random.Range(1, 10);
-        setRaycastCheckOneTheGround();
     }
     private void FixedUpdate()
     {
@@ -122,6 +113,8 @@ public class Enemy : MonoBehaviour
     //Check Distance Attack
     public void EnemyMove()
     {
+        if (FollowThePath.ins.setBoolOntheGround == false) return;
+
         if (anim.GetBool("DeadEnemy")) return;
         if (Player.ins.currentHealth <= 0) anim.SetBool("canWalk", false);
         if (Player.ins.currentHealth <= 0) return;
@@ -129,6 +122,7 @@ public class Enemy : MonoBehaviour
         this.distanceAttack = Vector2.Distance(target.position, transform.position);
         if (distanceAttack <= 5)
         {
+            
             if (target.position.x < transform.position.x)
             {
                 if (distanceAttack <= 1)
@@ -159,34 +153,6 @@ public class Enemy : MonoBehaviour
 
         }
     }
-
-
-
-
-    //Check Enemy On the Grounded
-    public void setRaycastCheckOneTheGround()
-    {
-        RaycastHit2D CheckOntheGrounded = Physics2D.Raycast(CheckOnTheGround.position, Vector2.down, raycastLength, groundLayer);
-
-        if (CheckOntheGrounded.collider != null)
-        {
-            Debug.DrawRay(CheckOnTheGround.position, Vector2.down * raycastLength, Color.green);
-            if (CheckOntheGrounded.collider.tag == "Ground")
-            {
-                return;
-            }
-        }
-        else
-        {
-            Debug.DrawRay(CheckOnTheGround.position, Vector2.down * raycastLength, Color.red);
-            Invoke("EnemyDead", 0.1f);
-        }
-    }
-
-
-
-
-
 
 
     public void setFacingRight()
