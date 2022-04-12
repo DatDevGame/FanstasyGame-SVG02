@@ -12,6 +12,7 @@ TagManager:
   - wayPoint1
   - wayPoint2
   - EnemyTrap
+  - EnemyBow
   layers:
   - Default
   - TransparentFX

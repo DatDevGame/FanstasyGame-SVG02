@@ -48,6 +48,7 @@ public class FollowThePath : MonoBehaviour
 
     public void moveWayPoint()
     {
+        if (anim.GetBool("DeadEnemy")) return;
         distance = Vector2.Distance(transform.position, target.position);
 
         if (distance <= 5) return;

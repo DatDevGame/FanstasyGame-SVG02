@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
     public LayerMask enemyLayer;
     public LayerMask enemyTrapLayer;
     bool stopMoveAttack = false;
-    public int dameEnemy = 100;
+    public int dameEnemy = 10;
 
     public float attackRate = 0.5f;
     float nextAttackTime = 0f;
@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
         timeDuration = 3f;
         timer = timeDuration;
 
-        maxHealth = 10f;
+        maxHealth = 1000f;
         currentHealth = maxHealth;
         sliderHealth.maxValue = maxHealth;
         sliderHealth.value = maxHealth;
@@ -318,6 +318,10 @@ public class Player : MonoBehaviour
             else if (enemy.tag == "EnemyTrap")
             {
                 enemy.GetComponent<EnemyTrap>().receiveDame(dameEnemy);
+            }
+            else if (enemy.tag == "EnemyBow")
+            {
+                enemy.GetComponent<EnemyBow>().receiDame(dameEnemy);
             }
           
         }

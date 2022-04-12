@@ -29,6 +29,7 @@ public class MeleeEnemy : MonoBehaviour
     }
     public void TestRaycat()
     {
+        if (anim.GetBool("DeadEnemy")) return;
         if (Player.ins.currentHealth <= 0) return;
 
         if (anim.GetBool("DeadEnemy")) return;

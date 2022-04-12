@@ -569,14 +569,14 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.9
-    functionName: attackPlayers
+    functionName: soundAttackSecond
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.9
-    functionName: soundAttackSecond
+    functionName: attackPlayers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
