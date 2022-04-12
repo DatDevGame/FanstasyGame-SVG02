@@ -83,6 +83,7 @@ public class EnemyBow : MonoBehaviour
     }
     public void dead()
     {
+        GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
         anim.SetBool("DeadEnemytArrow", true);
         Destroy(gameObject, 4f);

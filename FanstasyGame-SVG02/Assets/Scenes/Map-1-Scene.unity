@@ -18391,7 +18391,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 94.7, y: 22.15, z: -10}
+  m_LocalPosition: {x: 3.5, y: 2.1499996, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1454685732}
@@ -31640,7 +31640,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902526138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 94.7, y: 18.8, z: 0}
+  m_LocalPosition: {x: 3.5, y: -1.2, z: 0}
   m_LocalScale: {x: 3.689011, y: 3.783299, z: 1}
   m_Children:
   - {fileID: 1413060143}
@@ -44031,7 +44031,7 @@ MonoBehaviour:
   posArrow: {fileID: 419846073}
   distance: 0
   attackRate: 0
-  currentHealth: 1
+  currentHealth: 100
 --- !u!95 &1317289459
 Animator:
   serializedVersion: 3
@@ -64573,7 +64573,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2011185016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 94.7, y: 22.15, z: -10}
+  m_LocalPosition: {x: 3.5, y: 2.1499996, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1233427145}

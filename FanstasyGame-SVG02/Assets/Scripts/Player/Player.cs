@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
     public LayerMask enemyLayer;
     public LayerMask enemyTrapLayer;
     bool stopMoveAttack = false;
-    public int dameEnemy = 10;
+    public int dameEnemy = 20;
 
     public float attackRate = 0.5f;
     float nextAttackTime = 0f;
@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
         timeDuration = 3f;
         timer = timeDuration;
 
-        maxHealth = 1000f;
+        maxHealth = 100f;
         currentHealth = maxHealth;
         sliderHealth.maxValue = maxHealth;
         sliderHealth.value = maxHealth;

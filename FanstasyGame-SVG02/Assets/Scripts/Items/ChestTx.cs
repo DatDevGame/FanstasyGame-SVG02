@@ -23,6 +23,9 @@ public class ChestTx : MonoBehaviour
     public GameObject ShowpressOchest;
 
 
+    bool checkOpenOne = true;
+
+
 
     bool openChest;
     // Start is called before the first frame update
@@ -31,6 +34,8 @@ public class ChestTx : MonoBehaviour
         ins = this;
         aus = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
+
+        checkOpenOne = true;
     }
 
     // Update is called once per frame
@@ -56,9 +61,10 @@ public class ChestTx : MonoBehaviour
 
         if (openChest)
         {
-            if (Input.GetKeyDown(KeyCode.O))
+            if (Input.GetKeyDown(KeyCode.O) && checkOpenOne)
             {
                 openChestTX();
+                checkOpenOne = false;
             }
 
             ShowpressOchest.SetActive(true);
