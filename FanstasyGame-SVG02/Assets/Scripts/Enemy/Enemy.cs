@@ -113,8 +113,33 @@ public class Enemy : MonoBehaviour
     //Check Distance Attack
     public void EnemyMove()
     {
-        if (FollowThePath.ins.setBoolOntheGround == false) return;
 
+        if (DistanceEnemy.ins.distance >= 8.2f)
+        {
+            if (transform.localScale.x > 1)
+            {
+                if (transform.localScale.x < 0)
+                {
+                    transform.position = new Vector3(transform.position.x + 0.05f, transform.position.y, transform.position.z);
+                }
+                else if (transform.localScale.x > 0)
+                {
+                    transform.position = new Vector3(transform.position.x - 0.05f, transform.position.y, transform.position.z);
+                }
+               
+            }
+            else if(transform.localScale.x < 1)
+            {
+                if (stopMoveEnemy) return;
+                anim.SetBool("canWalk", true);
+                transform.localScale = new Vector3(3f, 3f, 3f);
+                this.velocity = Vector2.left * speedMove * Time.deltaTime;
+                transform.Translate(velocity);
+            }
+
+            return;
+        } 
+        if (FollowThePath.ins.setBoolOntheGround == false) return;
         if (anim.GetBool("DeadEnemy")) return;
         if (Player.ins.currentHealth <= 0) anim.SetBool("canWalk", false);
         if (Player.ins.currentHealth <= 0) return;

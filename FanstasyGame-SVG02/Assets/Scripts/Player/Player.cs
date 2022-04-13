@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
         sliderHealth.maxValue = maxHealth;
         sliderHealth.value = maxHealth;
 
-        maxPower = 100f;
+        maxPower = 10000f;
         currentPower = maxPower;
         sliderPower.maxValue = maxPower;
         sliderPower.value = maxPower;
@@ -378,8 +378,10 @@ public class Player : MonoBehaviour
                 sliderPower.value = currentPower;
                 anim.SetTrigger("PlayerFireball");
                 nextFireball = Time.time + 2f / fireballRate;
+                Debug.Log(nextFireball);
             }
         }
+
     }
     public void spawnFireBall()
     {
