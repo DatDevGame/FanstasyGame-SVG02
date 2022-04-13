@@ -12,6 +12,9 @@ public class TimeSkillShowCanvas : MonoBehaviour
     public Image imageDash;
     public Image imageFireball;
 
+    public GameObject showNotmanaDash;
+    public GameObject showNotmanaFireBall;
+
     float timerAttack;
     float timerFireball;
     float timerDash;
@@ -19,12 +22,16 @@ public class TimeSkillShowCanvas : MonoBehaviour
     void Start()
     {
         ins = this;
+
+        showNotmanaFireBall.SetActive(false);
+        showNotmanaDash.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         setTime();
+        showNotMana();
     }
 
     public void showTimeAttack(float timerAttacks)
@@ -50,5 +57,28 @@ public class TimeSkillShowCanvas : MonoBehaviour
 
         timerDash -= Time.deltaTime;
         imageDash.fillAmount = timerDash / 2f;
+    }
+
+    public void showNotMana()
+    {
+        if (Player.ins.currentPower < 20)
+        {
+            showNotmanaFireBall.SetActive(true);
+        }
+        else
+        {
+            showNotmanaFireBall.SetActive(false);
+        }
+
+
+
+        if (Player.ins.currentPower < 5)
+        {
+            showNotmanaDash.SetActive(true);
+        }
+        else
+        {
+            showNotmanaDash.SetActive(false);
+        }
     }
 }

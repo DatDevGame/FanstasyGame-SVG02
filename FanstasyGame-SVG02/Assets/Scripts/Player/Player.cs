@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
     public float currentHealth;
 
     float maxPower;
-    float currentPower;
+    public float currentPower;
 
 
     //Time Stop Screen
@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
         sliderHealth.maxValue = maxHealth;
         sliderHealth.value = maxHealth;
 
-        maxPower = 10000f;
+        maxPower = 100f;
         currentPower = maxPower;
         sliderPower.maxValue = maxPower;
         sliderPower.value = maxPower;
@@ -208,8 +208,8 @@ public class Player : MonoBehaviour
                 {
                     if (pressHorizontal < 0)
                     {
-                        TimeSkillShowCanvas.ins.showTimeDash(2f);
                         if (currentPower <= 0) return;
+                        TimeSkillShowCanvas.ins.showTimeDash(2f);
                         currentPower -= 5;
                         sliderPower.value = currentPower;
                         aus.PlayOneShot(soundDash);
@@ -219,9 +219,9 @@ public class Player : MonoBehaviour
                         nextDashTime = Time.time + 2f / dashRate;
                     }
                     else if (pressHorizontal > 0)
-                    {
-                        TimeSkillShowCanvas.ins.showTimeDash(2f);
+                    {                      
                         if (currentPower <= 0) return;
+                        TimeSkillShowCanvas.ins.showTimeDash(2f);
                         currentPower -= 5;
                         sliderPower.value = currentPower;
                         aus.PlayOneShot(soundDash);

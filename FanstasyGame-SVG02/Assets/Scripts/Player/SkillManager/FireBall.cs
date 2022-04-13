@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
-    float moveSpeed;
+    public float moveSpeed;
     Vector2 velocity;
 
     public GameObject player;
@@ -13,7 +13,6 @@ public class FireBall : MonoBehaviour
     {
         Destroy(gameObject, 10f);
 
-        moveSpeed = 10f;
         player = GameObject.Find("Player");
 
         if (player.transform.localScale.x > 0)
