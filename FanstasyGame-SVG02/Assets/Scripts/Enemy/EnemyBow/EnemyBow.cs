@@ -19,6 +19,18 @@ public class EnemyBow : MonoBehaviour
 
     public float currentHealth;
     float maxHealth;
+
+    //Spawn Item
+
+    public GameObject HealthItem;
+    public GameObject ManaItem;
+    public GameObject GemItem;
+
+    public Transform posSpawnHealth;
+    public Transform posSpawnMana;
+    public Transform posSpawnGem;
+
+    public int randomItem;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -26,11 +38,15 @@ public class EnemyBow : MonoBehaviour
 
         maxHealth = 10f;
         currentHealth = maxHealth;
+
+        randomItem = Random.Range(1, 5);
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+
         attackTarget();
     }
 
@@ -87,5 +103,27 @@ public class EnemyBow : MonoBehaviour
         this.enabled = false;
         anim.SetBool("DeadEnemytArrow", true);
         Destroy(gameObject, 4f);
+
+        if (randomItem == 1 )
+        {
+            Instantiate(HealthItem, posSpawnHealth.position, Quaternion.identity);
+            Instantiate(GemItem, posSpawnGem.position, Quaternion.identity);
+        }
+        else if (randomItem == 3)
+        {
+            Instantiate(ManaItem, posSpawnMana.position, Quaternion.identity);
+            Instantiate(GemItem, posSpawnGem.position, Quaternion.identity);
+        }
+        else if (randomItem == 5)
+        {
+            Instantiate(HealthItem, posSpawnHealth.position, Quaternion.identity);
+            Instantiate(ManaItem, posSpawnMana.position, Quaternion.identity);
+            Instantiate(GemItem, posSpawnGem.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(GemItem, posSpawnGem.position, Quaternion.identity);
+        }
+
     }
 }

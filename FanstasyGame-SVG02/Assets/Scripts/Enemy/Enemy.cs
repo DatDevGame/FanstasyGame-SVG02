@@ -113,32 +113,6 @@ public class Enemy : MonoBehaviour
     //Check Distance Attack
     public void EnemyMove()
     {
-
-        if (DistanceEnemy.ins.distance >= 8.2f)
-        {
-            if (transform.localScale.x > 1)
-            {
-                if (transform.localScale.x < 0)
-                {
-                    transform.position = new Vector3(transform.position.x + 0.05f, transform.position.y, transform.position.z);
-                }
-                else if (transform.localScale.x > 0)
-                {
-                    transform.position = new Vector3(transform.position.x - 0.05f, transform.position.y, transform.position.z);
-                }
-               
-            }
-            else if(transform.localScale.x < 1)
-            {
-                if (stopMoveEnemy) return;
-                anim.SetBool("canWalk", true);
-                transform.localScale = new Vector3(3f, 3f, 3f);
-                this.velocity = Vector2.left * speedMove * Time.deltaTime;
-                transform.Translate(velocity);
-            }
-
-            return;
-        } 
         if (FollowThePath.ins.setBoolOntheGround == false) return;
         if (anim.GetBool("DeadEnemy")) return;
         if (Player.ins.currentHealth <= 0) anim.SetBool("canWalk", false);
@@ -147,35 +121,42 @@ public class Enemy : MonoBehaviour
         this.distanceAttack = Vector2.Distance(target.position, transform.position);
         if (distanceAttack <= 5)
         {
-            
-            if (target.position.x < transform.position.x)
+            if (PatrolEnemy.ins.checkInZonePatrol || PatrolEnemy.ins.checkInZonePatrolZone1 || PatrolEnemy.ins.checkInZonePatrolZone2)
             {
                 if (distanceAttack <= 1)
                 {
                     anim.SetBool("canWalk", false);
                     return;
                 }
-                    
-                if (stopMoveEnemy) return;
-                anim.SetBool("canWalk", true);
-                transform.localScale = new Vector3(3f, 3f, 3f);
-                this.velocity = Vector2.left * speedMove * Time.deltaTime;
-                transform.Translate(velocity);
-                setFacingRight();
 
+                if (target.position.x < transform.position.x)
+                {
+                    if (distanceAttack <= 1)
+                    {
+                        anim.SetBool("canWalk", false);
+                        return;
+                    }
+
+                    if (stopMoveEnemy) return;
+                    anim.SetBool("canWalk", true);
+                    transform.localScale = new Vector3(-3f, 3f, 3f);
+                    this.velocity = Vector2.left * speedMove * Time.deltaTime;
+                    transform.Translate(velocity);
+
+                }
+                else
+                {
+                    if (stopMoveEnemy) return;
+                    anim.SetBool("canWalk", true);
+                    transform.localScale = new Vector3(3f, 3f, 3f);
+                    this.velocity = Vector2.right * speedMove * Time.deltaTime;
+                    transform.Translate(velocity);
+                }
             }
-            else
+            else if(!PatrolEnemy.ins.checkInZonePatrol || !PatrolEnemy.ins.checkInZonePatrolZone1 || PatrolEnemy.ins.checkInZonePatrolZone2)
             {
-                if (stopMoveEnemy) return;
-                anim.SetBool("canWalk", true);
-                transform.localScale = new Vector3(-3f, 3f, 3f);
-                this.velocity = Vector2.right * speedMove * Time.deltaTime;
-                transform.Translate(velocity);
-                setFacingRight();
-
-
+                anim.SetBool("canWalk", false);
             }
-
         }
     }
 
