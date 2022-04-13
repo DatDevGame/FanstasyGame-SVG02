@@ -70,6 +70,14 @@ public class Player : MonoBehaviour
     public float attackRate = 0.5f;
     float nextAttackTime = 0f;
 
+
+    //FireBall Skill
+    public GameObject fireballPrefabs;
+    public Transform posFireball;
+    private float nextFireball;
+    private float fireballRate;
+
+
     //Heal Player and Power
     float maxHealth;
     public float currentHealth;
@@ -127,6 +135,9 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+
+        fireballRate = 2f;
     }
 
     // Update is called once per frame
@@ -135,9 +146,8 @@ public class Player : MonoBehaviour
         AttackAnimationPlayer();
         PlayerJump();
         PlayerDash();
-        //TimeDead();
         getLevelPlayer();
-        //attackChextTx();
+        skillFireBall();
     }
     private void FixedUpdate()
     {
@@ -358,6 +368,24 @@ public class Player : MonoBehaviour
             }
         }
     }
+    public void skillFireBall()
+    {
+        if (Input.GetKeyDown(KeyCode.K) && currentPower >= 20)
+        {
+            if (Time.time >= nextFireball)
+            {
+                currentPower -= 20f;
+                sliderPower.value = currentPower;
+                anim.SetTrigger("PlayerFireball");
+                nextFireball = Time.time + 2f / fireballRate;
+            }
+        }
+    }
+    public void spawnFireBall()
+    {
+        Instantiate(fireballPrefabs, posFireball.position, Quaternion.identity);
+    }
+
     //Set Status Animation
     public void setStopMoveAttack()
     {
