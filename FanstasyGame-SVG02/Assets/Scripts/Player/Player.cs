@@ -69,6 +69,7 @@ public class Player : MonoBehaviour
 
     public float attackRate = 0.5f;
     float nextAttackTime = 0f;
+    public float timerSkillAttack;
 
 
     //FireBall Skill
@@ -76,6 +77,7 @@ public class Player : MonoBehaviour
     public Transform posFireball;
     private float nextFireball;
     private float fireballRate;
+    bool stopFireballWhenAttack;
 
 
     //Heal Player and Power
@@ -137,7 +139,7 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
 
 
-        fireballRate = 2f;
+        fireballRate = 0.4f;
     }
 
     // Update is called once per frame
@@ -206,6 +208,7 @@ public class Player : MonoBehaviour
                 {
                     if (pressHorizontal < 0)
                     {
+                        TimeSkillShowCanvas.ins.showTimeDash(2f);
                         if (currentPower <= 0) return;
                         currentPower -= 5;
                         sliderPower.value = currentPower;
@@ -217,6 +220,7 @@ public class Player : MonoBehaviour
                     }
                     else if (pressHorizontal > 0)
                     {
+                        TimeSkillShowCanvas.ins.showTimeDash(2f);
                         if (currentPower <= 0) return;
                         currentPower -= 5;
                         sliderPower.value = currentPower;
@@ -236,6 +240,7 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.J))
             {
+                TimeSkillShowCanvas.ins.showTimeAttack(0.5f);
                 anim.SetBool("PlayerDashAttack", true);
                 anim.SetBool("PlayerDash", false);
             }
@@ -360,6 +365,7 @@ public class Player : MonoBehaviour
             {
                 if (Time.time >= nextAttackTime)
                 {
+                    TimeSkillShowCanvas.ins.showTimeAttack(0.5f);
                     anim.SetTrigger("PlayerAttack");
                     this.pressHorizontal = 0f;
                     nextAttackTime = Time.time + 2f / attackRate;
@@ -370,15 +376,17 @@ public class Player : MonoBehaviour
     }
     public void skillFireBall()
     {
-        if (Input.GetKeyDown(KeyCode.K) && currentPower >= 20)
+        if (stopFireballWhenAttack) return;
+
+        if (Input.GetKeyDown(KeyCode.K) && currentPower >= 20 && !stopFireballWhenAttack)
         {
             if (Time.time >= nextFireball)
             {
+                TimeSkillShowCanvas.ins.showTimeFireball(5f);
                 currentPower -= 20f;
                 sliderPower.value = currentPower;
                 anim.SetTrigger("PlayerFireball");
                 nextFireball = Time.time + 2f / fireballRate;
-                Debug.Log(nextFireball);
             }
         }
 
@@ -389,6 +397,15 @@ public class Player : MonoBehaviour
     }
 
     //Set Status Animation
+    public void setStopFireballTrue()
+    {
+        stopFireballWhenAttack = true;
+    }
+    public void setStopFireballFalse()
+    {
+        stopFireballWhenAttack = false;
+    }
+
     public void setStopMoveAttack()
     {
         stopMoveAttack = false;

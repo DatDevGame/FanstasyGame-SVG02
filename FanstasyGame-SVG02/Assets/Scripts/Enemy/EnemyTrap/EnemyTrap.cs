@@ -26,7 +26,7 @@ public class EnemyTrap : MonoBehaviour
     public float attackRate = 2f;
 
     float distance;
-    float speedMove = 4f;
+    float speedMove = 5f;
 
     bool stopWhenAttack;
 
@@ -143,6 +143,11 @@ public class EnemyTrap : MonoBehaviour
                 transform.position = Vector2.MoveTowards(transform.position, target.position, speedMove * Time.deltaTime);
                 anim.SetBool("EnemyTrapWalk", true);
             }
+           
+        }
+        else if (boxCheck.collider == null)
+        {
+            anim.SetBool("EnemyTrapWalk", false);
         }
     }
 

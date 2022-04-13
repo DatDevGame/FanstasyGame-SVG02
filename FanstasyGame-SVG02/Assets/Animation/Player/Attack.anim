@@ -554,6 +554,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0
+    functionName: setStopFireballTrue
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.5
     functionName: attackPlayers
     data: 
@@ -584,6 +591,13 @@ AnimationClip:
     messageOptions: 0
   - time: 1.1
     functionName: setStopMoveAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.1
+    functionName: setStopFireballFalse
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
