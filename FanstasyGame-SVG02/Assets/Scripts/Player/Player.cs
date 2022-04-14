@@ -160,6 +160,8 @@ public class Player : MonoBehaviour
 
     public void PlayerMovent()
     {
+        if (moveLadder.ins.setMove) return;
+
         if (anim.GetBool("PlayerDead")) return;
         if (isNotMove) return;
 
@@ -197,6 +199,8 @@ public class Player : MonoBehaviour
 
     public void PlayerDash()
     {
+        if (moveLadder.ins.setMove) return;
+
         if (anim.GetBool("PlayerDead")) return;
         if (isNotMove) return;
 
@@ -251,6 +255,9 @@ public class Player : MonoBehaviour
     //Player Jump
     public void PlayerJump()
     {
+        if (moveLadder.ins.setMove) return;
+
+
         if (anim.GetBool("PlayerDead")) return;
 
         if (isNotMove) return;
@@ -323,6 +330,8 @@ public class Player : MonoBehaviour
     //PlayerAttack
     public void attackPlayers()
     {
+        if (moveLadder.ins.setMove) return;
+
         Collider2D[] hitEnemy = Physics2D.OverlapCircleAll(AttackPoint.position, attackRange, enemyLayer);
         foreach (Collider2D enemy in hitEnemy)
         {
@@ -376,6 +385,8 @@ public class Player : MonoBehaviour
     }
     public void skillFireBall()
     {
+        if (moveLadder.ins.setMove) return;
+
         if (stopFireballWhenAttack) return;
 
         if (Input.GetKeyDown(KeyCode.K) && currentPower >= 20 && !stopFireballWhenAttack)
