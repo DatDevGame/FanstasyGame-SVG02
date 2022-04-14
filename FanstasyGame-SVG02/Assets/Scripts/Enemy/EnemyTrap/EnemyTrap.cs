@@ -20,6 +20,9 @@ public class EnemyTrap : MonoBehaviour
     public Transform posRaycast;
     public float lengthRaycast = 1.5f;
     float directionRaycast;
+
+
+
     //Check Player Near
     public Transform target;
     float nextAttack;
@@ -35,9 +38,6 @@ public class EnemyTrap : MonoBehaviour
     public Transform BoxCast;
     [SerializeField]private float posXBox;
     [SerializeField]private float posYBox;
-
-
-
 
 
     //Animation Attack

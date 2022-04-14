@@ -121,7 +121,7 @@ public class Enemy : MonoBehaviour
         this.distanceAttack = Vector2.Distance(target.position, transform.position);
         if (distanceAttack <= 5)
         {
-            if (PatrolEnemy.ins.checkInZonePatrol || PatrolEnemy.ins.checkInZonePatrolZone1 || PatrolEnemy.ins.checkInZonePatrolZone2)
+            if (PatrolEnemy.ins.checkInZonePatrol || PatrolEnemy.ins.checkInZonePatrolZone1 || PatrolEnemy.ins.checkInZonePatrolZone2 || PatrolEnemy.ins.checkInZonePatrolZone3)
             {
                 if (distanceAttack <= 1)
                 {
@@ -153,7 +153,7 @@ public class Enemy : MonoBehaviour
                     transform.Translate(velocity);
                 }
             }
-            else if(!PatrolEnemy.ins.checkInZonePatrol || !PatrolEnemy.ins.checkInZonePatrolZone1 || PatrolEnemy.ins.checkInZonePatrolZone2)
+            else if(!PatrolEnemy.ins.checkInZonePatrol || !PatrolEnemy.ins.checkInZonePatrolZone1 || !PatrolEnemy.ins.checkInZonePatrolZone2 || !PatrolEnemy.ins.checkInZonePatrolZone3)
             {
                 anim.SetBool("canWalk", false);
             }

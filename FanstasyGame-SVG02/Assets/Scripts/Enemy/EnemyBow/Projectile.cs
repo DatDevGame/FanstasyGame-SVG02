@@ -13,7 +13,8 @@ public class Projectile : MonoBehaviour
 
     Vector3 rotate;
 
-
+    float currentHealth;
+    float maxHealth;
 
     bool direction;
 
@@ -24,6 +25,8 @@ public class Projectile : MonoBehaviour
     }
     void Start()
     {
+        maxHealth = 1f;
+        currentHealth = maxHealth;
         speed = 10f;
 
         rb = GetComponent<Rigidbody2D>();
@@ -41,7 +44,7 @@ public class Projectile : MonoBehaviour
         transform.Rotate(rotate);
     }
 
-    // Update is called once per frame
+    // Update is called once per fram
     void Update()
     {
         move();
@@ -91,6 +94,15 @@ public class Projectile : MonoBehaviour
             rotate = new Vector3(0, 0, player.position.y / 2);
         }
     }
+
+    public void receiveDameProjectile(int dame)
+    {
+        currentHealth -= dame;
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -102,6 +114,7 @@ public class Projectile : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             this.rb.isKinematic = true;
+            GetComponent<Collider2D>().enabled = false;
         }
     }
 

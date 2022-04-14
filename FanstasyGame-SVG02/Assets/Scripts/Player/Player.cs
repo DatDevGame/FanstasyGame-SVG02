@@ -347,7 +347,11 @@ public class Player : MonoBehaviour
             {
                 enemy.GetComponent<EnemyBow>().receiDame(dameEnemy);
             }
-          
+            else if (enemy.tag == "Arrow")
+            {
+                enemy.GetComponent<Projectile>().receiveDameProjectile(dameEnemy);
+            }
+
         }
     }
 

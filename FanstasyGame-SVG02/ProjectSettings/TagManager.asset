@@ -13,6 +13,11 @@ TagManager:
   - wayPoint2
   - EnemyTrap
   - EnemyBow
+  - ColiderLadder
+  - ColiderLadderDown
+  - ColiderLadder1
+  - ColiderLadderDown1
+  - Arrow
   layers:
   - Default
   - TransparentFX
