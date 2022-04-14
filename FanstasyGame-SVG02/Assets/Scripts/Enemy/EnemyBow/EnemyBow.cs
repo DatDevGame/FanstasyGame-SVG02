@@ -40,13 +40,12 @@ public class EnemyBow : MonoBehaviour
         currentHealth = maxHealth;
 
         randomItem = Random.Range(1, 5);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-
         attackTarget();
     }
 
@@ -86,8 +85,6 @@ public class EnemyBow : MonoBehaviour
     {
         Instantiate(arrowPrefab, posArrow.position, posArrow.rotation);
     }
-
-
     public void receiDame(int dame)
     {
         anim.SetTrigger("HurtEnemyArrow");

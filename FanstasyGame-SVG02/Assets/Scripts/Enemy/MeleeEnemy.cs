@@ -11,7 +11,7 @@ public class MeleeEnemy : MonoBehaviour
     [SerializeField] private float lengthRaycat = 5f;
 
     float nextAttackTime;
-    public float attackRate = 2f;
+    public float attackRate = 1f;
 
     //Enemy Attack
     public Transform attackPoint;
@@ -26,6 +26,7 @@ public class MeleeEnemy : MonoBehaviour
     {
         enemy = FindObjectOfType<Enemy>();
         anim = GetComponent<Animator>();
+        attackRate = 1f;
     }
     public void TestRaycat()
     {
