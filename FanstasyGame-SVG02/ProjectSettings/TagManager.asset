@@ -18,6 +18,7 @@ TagManager:
   - ColiderLadder1
   - ColiderLadderDown1
   - Arrow
+  - Boss1
   layers:
   - Default
   - TransparentFX

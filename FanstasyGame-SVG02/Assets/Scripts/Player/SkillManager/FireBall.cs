@@ -55,6 +55,13 @@ public class FireBall : MonoBehaviour
             hit.receiveDame(1);
             Destroy(gameObject);
         }
+        if (collision.gameObject.CompareTag("Boss1"))
+        {
+            BossMap1 hit = collision.gameObject.GetComponent<BossMap1>();
+            hit.ReceiveDameBoss(40);
+            Destroy(gameObject);
+        }
+
         if (collision.gameObject.CompareTag("Ground"))
         {
             Destroy(gameObject);

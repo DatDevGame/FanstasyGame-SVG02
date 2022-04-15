@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
         timeDuration = 3f;
         timer = timeDuration;
 
-        maxHealth = 100f;
+        maxHealth = 1000f;
         currentHealth = maxHealth;
         sliderHealth.maxValue = maxHealth;
         sliderHealth.value = maxHealth;
@@ -351,7 +351,10 @@ public class Player : MonoBehaviour
             {
                 enemy.GetComponent<Projectile>().receiveDameProjectile(dameEnemy);
             }
-
+            else if (enemy.tag == "Boss1")
+            {
+                enemy.GetComponent<BossMap1>().ReceiveDameBoss(dameEnemy);
+            }
         }
     }
 

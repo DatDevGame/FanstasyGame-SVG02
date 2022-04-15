@@ -95,8 +95,6 @@ public class PatrolEnemy : MonoBehaviour
         {
             checkInZonePatrolZone3 = false;
         }
-        Debug.Log(checkInZonePatrolZone3);
-
     }
 
     private void OnDrawGizmos()
