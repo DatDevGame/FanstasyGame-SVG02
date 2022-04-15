@@ -24,6 +24,14 @@ public class MoveBoss : MonoBehaviour
     float timeTeleDuration;
     int directionTele;
 
+    //Skill tele
+    int randomPos;
+    float timerTeleSkill;
+    float timerDurationTeleSkill;
+    int directionTeleSkill;
+    bool setStopTeleWhenAttack;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +42,9 @@ public class MoveBoss : MonoBehaviour
 
         timeTeleDuration = 5f;
         timerTele = timeTeleDuration;
+
+        timerDurationTeleSkill = 0.7f;
+        timerTeleSkill = timerDurationTeleSkill;
     }
 
     // Update is called once per frame
@@ -41,6 +52,7 @@ public class MoveBoss : MonoBehaviour
     {
         Move();
         telePlayer();
+        skillTeleport();
     }
 
     public void Move()
@@ -113,6 +125,98 @@ public class MoveBoss : MonoBehaviour
         Debug.Log(timerTele);
     }
 
+    public void skillTeleport()
+    {
+        if (BossMap1.ins.currentHealthBoss <= 0) return;
+
+        if (BossMap1.ins.currentHealthBoss >= 100) return;
+
+        directionTeleSkill = Random.Range(-2, 2);
+
+        if (setStopTeleWhenAttack) return; 
+        timerTeleSkill -= Time.deltaTime;
+        if (timerTeleSkill <= 0)
+        {
+            randomPos = Random.Range(1, 10);
+
+            if (randomPos == 1)
+            {
+                anim.SetTrigger("TeleBoss");
+                aus.PlayOneShot(soundTele);
+                transform.position = new Vector2(target.position.x * directionTeleSkill, target.position.y + 3f);
+            }
+            else if (randomPos == 2)
+            {
+                anim.SetTrigger("TeleBoss");
+                aus.PlayOneShot(soundTele);
+                transform.position = new Vector2(target.position.x + 2f * directionTeleSkill, target.position.y + 3f);
+            }
+            else if (randomPos == 3)
+            {
+                anim.SetTrigger("TeleBoss");
+                aus.PlayOneShot(soundTele);
+                transform.position = new Vector2(target.position.x + 1f * directionTeleSkill, target.position.y + 3f);
+            }
+            else if (randomPos == 4)
+            {
+                anim.SetTrigger("TeleBoss");
+                aus.PlayOneShot(soundTele);
+                transform.position = new Vector2(target.position.x + 2.5f * directionTeleSkill, target.position.y + 3f);
+            }
+            else if (randomPos == 5)
+            {
+                anim.SetTrigger("TeleBoss");
+                aus.PlayOneShot(soundTele);
+                transform.position = new Vector2(target.position.x + 2.8f * directionTeleSkill, target.position.y + 3f);
+            }
+            else if (randomPos == 6)
+            {
+                anim.SetTrigger("TeleBoss");
+                aus.PlayOneShot(soundTele);
+                transform.position = new Vector2(target.position.x + 3.5f * directionTeleSkill, target.position.y + 3f);
+            }
+            else if (randomPos == 7)
+            {
+                anim.SetTrigger("TeleBoss");
+                aus.PlayOneShot(soundTele);
+                transform.position = new Vector2(target.position.x + 1.5f * directionTeleSkill, target.position.y + 3f);
+            }
+            else if (randomPos == 8)
+            {
+                anim.SetTrigger("TeleBoss");
+                aus.PlayOneShot(soundTele);
+                transform.position = new Vector2(target.position.x + 0.5f * directionTeleSkill, target.position.y + 3f);
+            }
+            else if (randomPos == 9)
+            {
+                anim.SetTrigger("TeleBoss");
+                aus.PlayOneShot(soundTele);
+                transform.position = new Vector2(target.position.x + 1.8f * directionTeleSkill, target.position.y + 3f);
+            }
+            else if (randomPos == 10)
+            {
+                anim.SetTrigger("TeleBoss");
+                aus.PlayOneShot(soundTele);
+                transform.position = new Vector2(target.position.x + 0.7f * directionTeleSkill, target.position.y + 3f);
+            }
+            if (target.position.x > transform.position.x)
+            {
+                Vector2 flip = transform.eulerAngles;
+                flip.y = 0f;
+                transform.eulerAngles = flip;
+            }
+            else
+            {
+                Vector2 flip = transform.eulerAngles;
+                flip.y = -180f;
+                transform.eulerAngles = flip;
+            }
+            timerTeleSkill = timerDurationTeleSkill;
+        }
+       
+    }
+
+
     public void notFaceAttackTrue()
     {
         NotFaceWhenAttack = true;
@@ -120,5 +224,13 @@ public class MoveBoss : MonoBehaviour
     public void notFaceWhenAttackFalse()
     {
         NotFaceWhenAttack = false;
+    }
+    public void setBoolNotTeleWhenAttackTrue()
+    {
+        setStopTeleWhenAttack = true;
+    }
+    public void setBoolNotTeleWhenAttackFalse()
+    {
+        setStopTeleWhenAttack = false;
     }
 }

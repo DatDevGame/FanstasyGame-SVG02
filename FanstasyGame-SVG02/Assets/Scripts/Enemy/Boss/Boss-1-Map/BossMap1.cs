@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossMap1 : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class BossMap1 : MonoBehaviour
     AudioSource aus;
     Animator anim;
     Rigidbody2D rb;
+
+    //Health bar - Power bar
+    public Slider healthSlider;
+    public Slider powerSlider;
+    public Canvas statusBoss1;
 
     //sound
     public AudioClip sounDead;
@@ -26,19 +32,26 @@ public class BossMap1 : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         ins = this;
+
         maxHealthBoss = 500f;
         currentHealthBoss = maxHealthBoss;
+        healthSlider.maxValue = maxHealthBoss;
+        healthSlider.value = currentHealthBoss;
+
+        powerSlider.maxValue = 100f;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        statusBoss1.transform.eulerAngles = new Vector3(0f, 0f, 0f);
     }
 
     public void ReceiveDameBoss(int dame)
     {
         currentHealthBoss -= dame;
+        healthSlider.value = currentHealthBoss;
         if (currentHealthBoss <= 0)
         {
             DeadBoss();
@@ -47,8 +60,9 @@ public class BossMap1 : MonoBehaviour
     }
     public void DeadBoss()
     {
+        anim.SetBool("WalkBoss1", false);
         aus.PlayOneShot(sounDead);
-        GetComponent<Rigidbody2D>().gravityScale = 0f;
+        GetComponent<Rigidbody2D>().isKinematic = true;
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<CapsuleCollider2D>().enabled = false;
         anim.SetBool("DeadBoss1", true);
@@ -56,8 +70,10 @@ public class BossMap1 : MonoBehaviour
     }
 
     public void setPower(int power)
-    {
+    { 
+
         powerAttackSkill += power;
+        powerSlider.value = powerAttackSkill;
         if (powerAttackSkill > 100)
         {
             powerAttackSkill = 100;
