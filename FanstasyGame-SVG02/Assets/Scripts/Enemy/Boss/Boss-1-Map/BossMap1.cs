@@ -10,7 +10,10 @@ public class BossMap1 : MonoBehaviour
     Animator anim;
     Rigidbody2D rb;
 
-    [SerializeField]private float currentHealthBoss;
+    //sound
+    public AudioClip sounDead;
+
+    public float currentHealthBoss;
     float maxHealthBoss;
 
     public float powerAttackSkill;
@@ -44,6 +47,10 @@ public class BossMap1 : MonoBehaviour
     }
     public void DeadBoss()
     {
+        aus.PlayOneShot(sounDead);
+        GetComponent<Rigidbody2D>().gravityScale = 0f;
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
         anim.SetBool("DeadBoss1", true);
         Destroy(gameObject, 5f);
     }

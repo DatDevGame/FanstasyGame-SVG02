@@ -118,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 15
   player: {fileID: 0}
+  exlopsionFireball: {fileID: 100002, guid: d3322403337d8c741b5a820cbe807d15, type: 3}
 --- !u!58 &5932797800823106031
 CircleCollider2D:
   m_ObjectHideFlags: 0

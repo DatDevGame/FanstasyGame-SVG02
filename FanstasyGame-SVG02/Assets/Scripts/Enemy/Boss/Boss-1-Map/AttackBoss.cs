@@ -6,6 +6,7 @@ public class AttackBoss : MonoBehaviour
 {
     //General
     Animator anim;
+    AudioSource aus;
     public LayerMask layer;
     int dameBoss;
 
@@ -20,11 +21,15 @@ public class AttackBoss : MonoBehaviour
     //Time Attack
     float nextAttack;
     [SerializeField]private float attackRate;
-    
+
+    //Sound Attack
+    public AudioClip soundAttack;
+    public AudioClip soundAttackInPlayer;
 
     // Start is called before the first frame update
     void Start()
     {
+        aus = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
         dameBoss = 10;
     }
@@ -37,6 +42,7 @@ public class AttackBoss : MonoBehaviour
 
     public void rayCastAttack()
     {
+        if (BossMap1.ins.currentHealthBoss <= 0) return;
         if (Player.ins.currentHealth <= 0) return;
         if (MoveBoss.ins.facingRight)
         {
@@ -55,6 +61,7 @@ public class AttackBoss : MonoBehaviour
                     }
                     if (Time.time >= nextAttack)
                     {
+                        soundAttacks();
                         anim.SetTrigger("AttackBoss1");
                         nextAttack = Time.time + 2f / attackRate;
                     }
@@ -82,6 +89,7 @@ public class AttackBoss : MonoBehaviour
                     }
                     if (Time.time >= nextAttack)
                     {
+                        soundAttacks();
                         anim.SetTrigger("AttackBoss1");
                         nextAttack = Time.time + 2f / attackRate;
                     }
@@ -99,6 +107,7 @@ public class AttackBoss : MonoBehaviour
         Collider2D[] hitAttack = Physics2D.OverlapCircleAll(attackPoint.position, radiusAttackPoint, layer);
         foreach (Collider2D hitPlayer in hitAttack)
         {
+            aus.PlayOneShot(soundAttackInPlayer);
             hitPlayer.GetComponent<Player>().receiveDame(dameBoss);
             BossMap1.ins.setPower(10);
         }
@@ -106,6 +115,11 @@ public class AttackBoss : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(attackPoint.position, radiusAttackPoint);
+    }
+
+    public void soundAttacks()
+    {
+        aus.PlayOneShot(soundAttack);
     }
 
 }

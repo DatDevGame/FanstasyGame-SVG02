@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
     public LayerMask enemyLayer;
     public LayerMask enemyTrapLayer;
     bool stopMoveAttack = false;
-    public int dameEnemy = 20;
+    public int dameEnemy;
 
     public float attackRate = 0.5f;
     float nextAttackTime = 0f;
@@ -102,6 +102,7 @@ public class Player : MonoBehaviour
     public AudioClip soundAttack2;
     public AudioClip soundHurt;
     public AudioClip soundDead;
+    public AudioClip soundFireball;
     
 
     //Create Slider bar
@@ -400,6 +401,7 @@ public class Player : MonoBehaviour
         {
             if (Time.time >= nextFireball)
             {
+                aus.PlayOneShot(soundFireball);
                 TimeSkillShowCanvas.ins.showTimeFireball(5f);
                 currentPower -= 20f;
                 sliderPower.value = currentPower;

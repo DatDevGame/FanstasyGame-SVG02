@@ -9,6 +9,7 @@ public class FireBall : MonoBehaviour
 
     public GameObject player;
     float directionMove;
+
     void Start()
     {
         Destroy(gameObject, 10f);
@@ -41,30 +42,35 @@ public class FireBall : MonoBehaviour
         {
             Enemy hit = collision.gameObject.GetComponent<Enemy>();
             hit.ReceiveDame(30);
-            Destroy(gameObject);
+            destroyFireball();
         }
         if (collision.gameObject.CompareTag("EnemyBow"))
         {
             EnemyBow hit = collision.gameObject.GetComponent<EnemyBow>();
             hit.receiDame(50);
-            Destroy(gameObject);
+            destroyFireball();
         }
         if (collision.gameObject.CompareTag("EnemyTrap"))
         {
             EnemyTrap hit = collision.gameObject.GetComponent<EnemyTrap>();
             hit.receiveDame(1);
-            Destroy(gameObject);
+            destroyFireball();
         }
         if (collision.gameObject.CompareTag("Boss1"))
         {
             BossMap1 hit = collision.gameObject.GetComponent<BossMap1>();
             hit.ReceiveDameBoss(40);
-            Destroy(gameObject);
+            destroyFireball();
         }
 
         if (collision.gameObject.CompareTag("Ground"))
         {
-            Destroy(gameObject);
+            destroyFireball();
         }
+    }
+
+    public void destroyFireball()
+    {
+        Destroy(gameObject);
     }
 }
