@@ -6,6 +6,8 @@ public class SoundBG : MonoBehaviour
 {
     AudioSource aus;
 
+
+    public GameObject chestPrefabs;
     
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,10 @@ public class SoundBG : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             aus.Play();
+            Instantiate(chestPrefabs, new Vector2(303.6344f, 25.52701f), Quaternion.identity);
+            Player.ins.currentHealth = 100f;
+            Player.ins.currentPower = 100f;
         }
+
     }
 }

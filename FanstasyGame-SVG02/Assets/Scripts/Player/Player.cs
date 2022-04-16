@@ -357,6 +357,10 @@ public class Player : MonoBehaviour
             {
                 enemy.GetComponent<BossMap1>().ReceiveDameBoss(dameEnemy);
             }
+            else if (enemy.tag == "GiftBoss")
+            {
+                enemy.GetComponent<GiftBoss>().receiveDameGift(10);
+            }
         }
     }
 
@@ -579,11 +583,6 @@ public class Player : MonoBehaviour
         {
             aus.PlayOneShot(openGateTeleport);
             transform.position = new Vector2(292.3f, 18.4f);
-        }
-
-        if (collision.gameObject.CompareTag("StopSoundBackGround"))
-        {
-            aus.Stop();
         }
     }
 

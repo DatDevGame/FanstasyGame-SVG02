@@ -48,7 +48,6 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -317,15 +316,6 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      TeleportGate_0: -3318455997243279877
-      TeleportGate_2: -6993208481599032607
-      TeleportGate_6: -3218424435411970914
-      TeleportGate_4: 7975714336806272053
-      TeleportGate_5: -8893388676573288854
-      TeleportGate_3: 5095074879240667092
-      TeleportGate_7: -3027110983060341987
-      TeleportGate_1: 3740955663517761201
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

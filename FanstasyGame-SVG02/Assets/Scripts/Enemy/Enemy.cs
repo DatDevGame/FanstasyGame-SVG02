@@ -161,7 +161,7 @@ public class Enemy : MonoBehaviour
                 || !PatrolEnemy.ins.checkInZonePatrolZone1 
                 || !PatrolEnemy.ins.checkInZonePatrolZone2 
                 || !PatrolEnemy.ins.checkInZonePatrolZone3
-                || PatrolEnemy.ins.checkInZonePatrolZone4)
+                || !PatrolEnemy.ins.checkInZonePatrolZone4)
             {
                 anim.SetBool("canWalk", false);
             }

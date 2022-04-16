@@ -20,7 +20,7 @@ TagManager:
   - Arrow
   - Boss1
   - GateTeleport-map-1
-  - StopSoundBackGround
+  - GiftBoss
   layers:
   - Default
   - TransparentFX

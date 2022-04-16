@@ -102,11 +102,11 @@ public class MoveBoss : MonoBehaviour
         }
 
         //Fix tele
-        if (flipBoss.y == 180f)
+        if (target.position.x > 295)
         {
             directionTele = -2;
         }
-        else if (flipBoss.y == 0)
+        else if (target.position.x < 378)
         {
             directionTele = 2;
         }
