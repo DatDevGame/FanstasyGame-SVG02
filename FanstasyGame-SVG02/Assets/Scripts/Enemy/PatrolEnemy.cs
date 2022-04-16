@@ -28,6 +28,11 @@ public class PatrolEnemy : MonoBehaviour
     public Transform Zone3;
     [SerializeField] private float Zone3boxZone2x;
     [SerializeField] private float Zone3boxZone2y;
+
+    public bool checkInZonePatrolZone4;
+    public Transform Zone4;
+    [SerializeField] private float Zone4boxZone2x;
+    [SerializeField] private float Zone4boxZone2y;
     // Start is called before the first frame update
     void Start()
     {
@@ -95,6 +100,20 @@ public class PatrolEnemy : MonoBehaviour
         {
             checkInZonePatrolZone3 = false;
         }
+
+        //Zone 4
+        RaycastHit2D hitZone4= Physics2D.BoxCast(Zone4.position, new Vector2(Zone4boxZone2x, Zone4boxZone2y), 0f, Vector2.right, 0f, playerLayer);
+        if (hitZone4.collider != null)
+        {
+            if (hitZone4.collider.tag == "Player")
+            {
+                checkInZonePatrolZone4 = true;
+            }
+        }
+        else if (hitZone4.collider == null)
+        {
+            checkInZonePatrolZone4 = false;
+        }
     }
 
     private void OnDrawGizmos()
@@ -103,5 +122,6 @@ public class PatrolEnemy : MonoBehaviour
         Gizmos.DrawWireCube(Zone1.position, new Vector2(Zone1boxZone2x, Zone1boxZone2y));
         Gizmos.DrawWireCube(Zone2.position, new Vector2(Zone2boxZone2x, Zone2boxZone2y));
         Gizmos.DrawWireCube(Zone3.position, new Vector2(Zone3boxZone2x, Zone3boxZone2y));
+        Gizmos.DrawWireCube(Zone4.position, new Vector2(Zone4boxZone2x, Zone4boxZone2y));
     }
 }

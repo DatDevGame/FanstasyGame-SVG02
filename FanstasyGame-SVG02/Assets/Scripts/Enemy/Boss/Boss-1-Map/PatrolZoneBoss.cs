@@ -45,4 +45,6 @@ public class PatrolZoneBoss : MonoBehaviour
     {
         Gizmos.DrawWireCube(posBoxCast.position, new Vector2(xBoxCast, yBoxCast));
     }
+
+    
 }
