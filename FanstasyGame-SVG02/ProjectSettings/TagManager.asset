@@ -19,6 +19,7 @@ TagManager:
   - ColiderLadderDown1
   - Arrow
   - Boss1
+  - GateTeleport-map-1
   layers:
   - Default
   - TransparentFX

@@ -103,6 +103,7 @@ public class Player : MonoBehaviour
     public AudioClip soundHurt;
     public AudioClip soundDead;
     public AudioClip soundFireball;
+    public AudioClip openGateTeleport;
     
 
     //Create Slider bar
@@ -570,6 +571,16 @@ public class Player : MonoBehaviour
         Debug.Log("Exp"+expCurrent);
     }
 
-    
+
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("GateTeleport-map-1"))
+        {
+            aus.PlayOneShot(openGateTeleport);
+            transform.position = new Vector2(292.3f, 18.4f);
+        }
+    }
+
 
 }

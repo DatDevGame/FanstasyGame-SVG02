@@ -11,6 +11,8 @@ public class BossMap1 : MonoBehaviour
     Animator anim;
     Rigidbody2D rb;
 
+    public GameObject powerUp;
+
     //Health bar - Power bar
     public Slider healthSlider;
     public Slider powerSlider;
@@ -60,10 +62,12 @@ public class BossMap1 : MonoBehaviour
     }
     public void DeadBoss()
     {
+        transform.position = new Vector2(transform.position.x, 19.31f);
+        GetComponent<BoxCollider2D>().enabled = false;
         anim.SetBool("WalkBoss1", false);
         aus.PlayOneShot(sounDead);
         GetComponent<Rigidbody2D>().isKinematic = true;
-        GetComponent<BoxCollider2D>().enabled = false;
+        this.rb.constraints = RigidbodyConstraints2D.FreezePosition;
         GetComponent<CapsuleCollider2D>().enabled = false;
         anim.SetBool("DeadBoss1", true);
         Destroy(gameObject, 5f);

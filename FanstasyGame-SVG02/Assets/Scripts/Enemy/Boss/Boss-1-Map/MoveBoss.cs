@@ -95,7 +95,7 @@ public class MoveBoss : MonoBehaviour
     {
         if (BossMap1.ins.currentHealthBoss <= 0) return;
         //Not bug Tele
-        if (transform.position.x < 295 || transform.position.x > 335)
+        if (transform.position.x < 295 || transform.position.x > 378)
         {
             Debug.Log("Return");
             return;
@@ -104,11 +104,11 @@ public class MoveBoss : MonoBehaviour
         //Fix tele
         if (flipBoss.y == 180f)
         {
-            directionTele = 3;
+            directionTele = -2;
         }
         else if (flipBoss.y == 0)
         {
-            directionTele = -3;
+            directionTele = 2;
         }
 
 
@@ -130,6 +130,8 @@ public class MoveBoss : MonoBehaviour
         if (BossMap1.ins.currentHealthBoss <= 0) return;
 
         if (BossMap1.ins.currentHealthBoss >= 100) return;
+
+        BossMap1.ins.powerUp.SetActive(true);
 
         directionTeleSkill = Random.Range(-2, 2);
 
