@@ -31,23 +31,23 @@ public class GameController : MonoBehaviour
     {
         if (randPosSpawn == 1)
         {
-            randPos = new Vector2(50.08f, 1.05f);
+            randPos = new Vector2(51.78f, 13.78363f);
         }
         else if (randPosSpawn == 2)
         {
-            randPos = new Vector2(58.32f, 1.05f);
+            randPos = new Vector2(44.78f, 17.75f);
         }
         else if (randPosSpawn == 3)
         {
-            randPos = new Vector2(52.44f, 9.19f);
+            randPos = new Vector2(28.3f, 16.64f);
         }
         else if (randPosSpawn == 4)
         {
-            randPos = new Vector2(52.01f, 13.74f);
+            randPos = new Vector2(61.86f, 17.82f);
         }
         else
         {
-            randPos = new Vector2(27.61f, 15.12f);
+            randPos = new Vector2(81.51f, 16.81f);
         }
     }
     public void SpawnRandom()

@@ -23,7 +23,7 @@ public class ItemGem : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             ManagerScoreItem.ins.ReceiveGem(1);
-            Destroy(gameObject, 0.1f);
+            Destroy(gameObject);
 
         }
     }

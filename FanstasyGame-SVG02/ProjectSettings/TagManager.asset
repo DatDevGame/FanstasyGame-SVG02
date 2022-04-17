@@ -21,6 +21,7 @@ TagManager:
   - Boss1
   - GateTeleport-map-1
   - GiftBoss
+  - DeadGround
   layers:
   - Default
   - TransparentFX

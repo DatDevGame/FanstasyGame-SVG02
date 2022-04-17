@@ -8,7 +8,7 @@ public class ManagerScoreItem : MonoBehaviour
     public static ManagerScoreItem ins;
 
     UIManager UI;
-    int setGem;
+    public int setGem;
     AudioSource aus;
     public AudioClip soundGetItem;
 

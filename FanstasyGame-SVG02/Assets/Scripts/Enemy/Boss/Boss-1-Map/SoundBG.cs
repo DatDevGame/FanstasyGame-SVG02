@@ -26,10 +26,13 @@ public class SoundBG : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            transform.position = new Vector2(338.4f, 25f);
             aus.Play();
             Instantiate(chestPrefabs, new Vector2(303.6344f, 25.52701f), Quaternion.identity);
             Player.ins.currentHealth = 100f;
+            Player.ins.sliderHealth.value = Player.ins.currentHealth;
             Player.ins.currentPower = 100f;
+            Player.ins.sliderPower.value = Player.ins.currentPower;
         }
 
     }

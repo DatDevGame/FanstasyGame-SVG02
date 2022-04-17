@@ -31,7 +31,7 @@ public class AttackBoss : MonoBehaviour
     {
         aus = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
-        dameBoss = 10;
+        dameBoss = 3;
     }
 
     // Update is called once per frame

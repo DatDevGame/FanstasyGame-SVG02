@@ -30,16 +30,22 @@ public class EnemyBow : MonoBehaviour
     public Transform posSpawnMana;
     public Transform posSpawnGem;
 
-    public int randomItem;
+    int randomItem;
+
+    private void Awake()
+    {
+        
+    }
     void Start()
     {
         anim = GetComponent<Animator>();
         attackRate = 0.5f;
 
-        maxHealth = 10f;
+        maxHealth = 50f;
         currentHealth = maxHealth;
 
         randomItem = Random.Range(1, 5);
+        Debug.Log(randomItem);
 
     }
 
@@ -92,6 +98,7 @@ public class EnemyBow : MonoBehaviour
         if (currentHealth <= 0)
         {
             dead();
+            dropItem();
         }
     }
     public void dead()
@@ -103,26 +110,33 @@ public class EnemyBow : MonoBehaviour
         anim.SetBool("DeadEnemytArrow", true);
         Destroy(gameObject, 4f);
 
-        if (randomItem == 1 )
+
+    }
+    public void dropItem()
+    {
+        if (randomItem == 1)
         {
             Instantiate(HealthItem, posSpawnHealth.position, Quaternion.identity);
             Instantiate(GemItem, posSpawnGem.position, Quaternion.identity);
+            Debug.Log("k1");
         }
         else if (randomItem == 3)
         {
             Instantiate(ManaItem, posSpawnMana.position, Quaternion.identity);
             Instantiate(GemItem, posSpawnGem.position, Quaternion.identity);
+            Debug.Log("k3");
         }
         else if (randomItem == 5)
         {
             Instantiate(HealthItem, posSpawnHealth.position, Quaternion.identity);
             Instantiate(ManaItem, posSpawnMana.position, Quaternion.identity);
             Instantiate(GemItem, posSpawnGem.position, Quaternion.identity);
+            Debug.Log("k5");
         }
         else
         {
             Instantiate(GemItem, posSpawnGem.position, Quaternion.identity);
+            Debug.Log("k2 - 4");
         }
-
     }
 }

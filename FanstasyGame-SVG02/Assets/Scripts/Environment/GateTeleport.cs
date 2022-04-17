@@ -22,7 +22,10 @@ public class GateTeleport : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Invoke("closeGateTele", 2f);
+            if (ManagerScoreItem.ins.setGem >= 8)
+            {
+                Invoke("closeGateTele", 2f);
+            }
         }
     }
 

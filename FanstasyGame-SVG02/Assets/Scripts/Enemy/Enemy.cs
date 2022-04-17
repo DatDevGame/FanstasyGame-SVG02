@@ -57,12 +57,14 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
 
         anim.SetBool("DeadEnemy", false);
+
+        randomItem = Random.Range(1, 10);
     }
 
     // Update is called once per frame
     void Update()
     {
-        randomItem = Random.Range(1, 10);
+       
     }
     private void FixedUpdate()
     {
@@ -82,13 +84,25 @@ public class Enemy : MonoBehaviour
     }
     public void EnemyDead()
     {
+        
+        takeExpPlayer();
+        anim.SetBool("DeadEnemy", true);
+        GetComponent<Collider2D>().enabled = false;
+        this.enabled = false;
+        Destroy(gameObject, 5f);
+        randItemDead();
+    }
+    public void randItemDead()
+    {
         //Random Drop Item
         if (randomItem == 1)
         {
+            Instantiate(PrefabsItems, PosSpawn.position, Quaternion.identity);
             Instantiate(PrefabsItemHealth, PosSpawnHealth.position, Quaternion.identity);
         }
         else if (randomItem == 5)
         {
+            Instantiate(PrefabsItems, PosSpawn.position, Quaternion.identity);
             Instantiate(PrefabsItemMana, PosSpawnMana.position, Quaternion.identity);
         }
 
@@ -98,16 +112,10 @@ public class Enemy : MonoBehaviour
             Instantiate(PrefabsItemMana, PosSpawnMana.position, Quaternion.identity);
             Instantiate(PrefabsItems, PosSpawn.position, Quaternion.identity);
         }
-
-        Instantiate(PrefabsItems, PosSpawn.position, Quaternion.identity);
-
-
-        takeExpPlayer();
-
-        anim.SetBool("DeadEnemy", true);
-        GetComponent<Collider2D>().enabled = false;
-        this.enabled = false;
-        Destroy(gameObject, 5f);
+        else
+        {
+            Instantiate(PrefabsItems, PosSpawn.position, Quaternion.identity);
+        }
     }
 
     //Check Distance Attack

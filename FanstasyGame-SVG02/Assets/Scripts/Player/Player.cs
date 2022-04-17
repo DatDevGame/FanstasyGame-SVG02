@@ -119,7 +119,9 @@ public class Player : MonoBehaviour
         timeDuration = 3f;
         timer = timeDuration;
 
-        maxHealth = 1000f;
+        dameEnemy = 10;
+
+        maxHealth = 100f;
         currentHealth = maxHealth;
         sliderHealth.maxValue = maxHealth;
         sliderHealth.value = maxHealth;
@@ -408,7 +410,7 @@ public class Player : MonoBehaviour
             {
                 aus.PlayOneShot(soundFireball);
                 TimeSkillShowCanvas.ins.showTimeFireball(5f);
-                currentPower -= 20f;
+                currentPower -= 10f;
                 sliderPower.value = currentPower;
                 anim.SetTrigger("PlayerFireball");
                 nextFireball = Time.time + 2f / fireballRate;
@@ -575,14 +577,36 @@ public class Player : MonoBehaviour
         Debug.Log("Exp"+expCurrent);
     }
 
+    public void telePort()
+    {
+        transform.position = new Vector2(292.3f, 18.4f);
+    }
+    public void upDame()
+    {
+        dameEnemy = 30;
+    }
+    public void maxHealAndMana()
+    {
+        currentHealth = 100f;
+        sliderHealth.value = currentHealth;
+        currentPower = 100f;
+        sliderPower.value = currentPower;
+    }
 
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("GateTeleport-map-1"))
         {
-            aus.PlayOneShot(openGateTeleport);
-            transform.position = new Vector2(292.3f, 18.4f);
+            if (ManagerScoreItem.ins.setGem >= 8)
+            {
+                aus.PlayOneShot(openGateTeleport);
+                transform.position = new Vector2(292.3f, 18.4f);
+            }
+        }
+        if (collision.gameObject.CompareTag("DeadGround"))
+        {
+            playerDead();
         }
     }
 

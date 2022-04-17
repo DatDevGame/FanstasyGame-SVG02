@@ -89,7 +89,7 @@ public class MeleeEnemy : MonoBehaviour
         foreach (Collider2D player in hitPlayer)
         {
             Debug.Log("Hit Player");
-            player.GetComponent<Player>().receiveDame(10);
+            player.GetComponent<Player>().receiveDame(5);
         }   
     }
     public void OnDrawGizmos()

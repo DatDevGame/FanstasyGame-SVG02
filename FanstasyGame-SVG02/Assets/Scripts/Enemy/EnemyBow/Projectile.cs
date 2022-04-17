@@ -35,6 +35,9 @@ public class Projectile : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         EnemyBow = GameObject.Find("EnemyBow");
+        EnemyBow = GameObject.Find("EnemyBow2");
+
+
         playerPos = GameObject.Find("Player");
 
         setBool();

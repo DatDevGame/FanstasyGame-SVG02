@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     public GameObject showVolume;
     bool closeVolume;
 
+    //EndGame
+    public GameObject showPanelEndGame;
 
     //OpTion GUI Manager
 
@@ -29,6 +31,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         menuBtnShow();
+        showPanelEndGames();
     }
 
     public void setScoreGem(string txt)
@@ -83,6 +86,7 @@ public class UIManager : MonoBehaviour
     public void ReplayMenu()
     {
         SceneManager.LoadScene("Map-1-Scene");
+        showPanelEndGame.SetActive(false);
         Time.timeScale = 1f;
     }
     public void MusicMenu()
@@ -105,5 +109,18 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void showPanelEndGames()
+    {
+        Invoke("setEndGame", 10f);
+    }
 
+    public void setEndGame()
+    {
+        if (BossMap1.ins.currentHealthBoss <= 0)
+        {
+            showPanelEndGame.SetActive(true);
+            Time.timeScale = 0f;
+        }
+       
+    }
 }

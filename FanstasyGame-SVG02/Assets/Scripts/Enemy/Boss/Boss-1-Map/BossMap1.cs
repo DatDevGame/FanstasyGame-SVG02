@@ -11,6 +11,7 @@ public class BossMap1 : MonoBehaviour
     Animator anim;
     Rigidbody2D rb;
 
+    public Transform targerPlayer;
     public GameObject powerUp;
 
     //Health bar - Power bar
@@ -62,7 +63,7 @@ public class BossMap1 : MonoBehaviour
     }
     public void DeadBoss()
     {
-        transform.position = new Vector2(transform.position.x, 19.31f);
+        transform.position = new Vector2(transform.position.x, targerPlayer.position.y + 1.5f);
         GetComponent<BoxCollider2D>().enabled = false;
         anim.SetBool("WalkBoss1", false);
         aus.PlayOneShot(sounDead);
